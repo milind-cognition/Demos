@@ -72,3 +72,23 @@ def full_name(first_col="first_name", last_col="last_name"):
 def round_money(col):
     """HALF_UP to 2 dp (Spark ``round`` is HALF_UP; ``bround`` would be HALF_EVEN -- don't)."""
     return F.round(col, 2).cast(MONEY)
+
+
+def active_on_day(day, term_day_counts, hire_col="hire_date", term_col="term_date"):
+    """Employee active on ``day``: hired on/before it and not yet terminated.
+
+    Legacy has two definitions (legacy/README.md): people analytics (``turnover_snapshot``) counts an
+    employee termed ON the day as active (``term_day_counts=True`` -> ``term_date >= day``);
+    ``emp_metrics_daily`` / ``CohortTagger`` do not (``term_day_counts=False`` -> ``term_date > day``).
+    Blank ``term_date`` means not terminated. Dates are ISO strings, compared lexically like Hive.
+    """
+    d = F.lit(day.isoformat())
+    term = F.col(term_col)
+    still_employed = term >= d if term_day_counts else term > d
+    return (F.col(hire_col) <= d) & ((term == "") | term.isNull() | still_employed)
+
+
+def dated_between(col_name, start_date, end_date):
+    """ISO-string date column within [start, end] inclusive (Hive ``BETWEEN``); blank never matches."""
+    c = F.col(col_name)
+    return (c != "") & c.between(F.lit(start_date.isoformat()), F.lit(end_date.isoformat()))

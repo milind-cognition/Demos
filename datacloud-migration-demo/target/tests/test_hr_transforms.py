@@ -41,3 +41,23 @@ def test_round_money_is_half_up(spark):
     df = spark.createDataFrame([(Decimal("1.005"),), (Decimal("2.125"),)], "x decimal(10,3)")
     assert [r.y for r in df.select(hr.round_money(df.x).alias("y")).collect()] == [
         Decimal("1.01"), Decimal("2.13")]
+
+
+def test_active_on_day_two_legacy_definitions(spark):
+    rows = [("E1", "2024-01-01", ""), ("E2", "2024-01-01", "2024-03-15"), ("E3", "2024-01-01", "2024-03-14"),
+            ("E4", "2024-03-16", ""), ("E5", "2024-01-01", None)]
+    df = spark.createDataFrame(rows, "emp_id string, hire_date string, term_date string")
+    day = dt.date(2024, 3, 15)
+
+    def active(term_day_counts):
+        return sorted(r.emp_id for r in df.filter(hr.active_on_day(day, term_day_counts)).collect())
+
+    assert active(True) == ["E1", "E2", "E5"]
+    assert active(False) == ["E1", "E5"]
+
+
+def test_dated_between_is_inclusive_and_ignores_blank(spark):
+    rows = [("A", "2024-02-01"), ("B", "2024-02-29"), ("C", "2024-03-01"), ("D", ""), ("E", "2024-01-31")]
+    df = spark.createDataFrame(rows, "k string, d string")
+    out = df.filter(hr.dated_between("d", dt.date(2024, 2, 1), dt.date(2024, 2, 29)))
+    assert sorted(r.k for r in out.collect()) == ["A", "B"]
