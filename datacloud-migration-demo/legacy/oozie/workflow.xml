@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  hr_daily_wf : stage (shell) -> emp_metrics_daily (hive2) -> payroll_join (pig)
+  HDFS app dir: ${nameNode}/apps/oozie/hr_daily/
+      workflow.xml, coordinator.xml, job.properties
+      scripts/stage_and_publish.sh, scripts/emp_metrics_daily.sql, scripts/payroll_join.pig
+  NOTE: CohortTagger + turnover + publish are NOT here - run_daily.sh does them after this succeeds.
+-->
+<workflow-app name="hr_daily_wf" xmlns="uri:oozie:workflow:0.5">
+
+  <global>
+    <job-tracker>${jobTracker}</job-tracker>
+    <name-node>${nameNode}</name-node>
+    <configuration>
+      <property><name>mapreduce.job.queuename</name><value>${queueName}</value></property>
+      <property><name>oozie.launcher.mapreduce.map.memory.mb</name><value>2048</value></property>
+    </configuration>
+  </global>
+
+  <start to="stage"/>
+
+  <!-- 1. pull the SFTP drop into HDFS staging, header + dup-key audit -->
+  <action name="stage" retry-max="2" retry-interval="10">
+    <shell xmlns="uri:oozie:shell-action:0.3">
+      <exec>stage_and_publish.sh</exec>
+      <argument>stage</argument>
+      <argument>${runDate}</argument>
+      <env-var>HADOOP_USER_NAME=hadoop</env-var>
+      <file>${nameNode}/apps/oozie/hr_daily/scripts/stage_and_publish.sh#stage_and_publish.sh</file>
+      <capture-output/>
+    </shell>
+    <ok to="emp_metrics_daily"/>
+    <error to="notify_failure"/>
+  </action>
+
+  <!-- 2. SCD2 dim_employee + fct_emp_metrics_daily -->
+  <action name="emp_metrics_daily" retry-max="1" retry-interval="15">
+    <hive2 xmlns="uri:oozie:hive2-action:0.2">
+      <prepare>
+        <delete path="${nameNode}/warehouse/hr.db/fct_emp_metrics_daily"/>
+      </prepare>
+      <jdbc-url>${hiveJdbcUrl}</jdbc-url>
+      <script>${nameNode}/apps/oozie/hr_daily/scripts/emp_metrics_daily.sql</script>
+      <param>run_date=${runDate}</param>
+    </hive2>
+    <ok to="payroll_join"/>
+    <error to="notify_failure"/>
+  </action>
+
+  <!-- 3. payroll estimate + GL accrual rollup -->
+  <action name="payroll_join" retry-max="1" retry-interval="15">
+    <pig>
+      <prepare>
+        <delete path="${nameNode}/warehouse/hr.db/payroll_by_employee"/>
+        <delete path="${nameNode}/warehouse/hr.db/payroll_by_cost_center"/>
+      </prepare>
+      <configuration>
+        <property><name>pig.tmpfilecompression</name><value>true</value></property>
+      </configuration>
+      <script>${nameNode}/apps/oozie/hr_daily/scripts/payroll_join.pig</script>
+      <param>RUN_DATE=${runDate}</param>
+      <param>STAGING=${nameNode}/data/staging/hr</param>
+      <param>WAREHOUSE=${nameNode}/warehouse/hr.db</param>
+    </pig>
+    <ok to="end"/>
+    <error to="notify_failure"/>
+  </action>
+
+  <action name="notify_failure">
+    <email xmlns="uri:oozie:email-action:0.2">
+      <to>${alertEmail}</to>
+      <subject>[HR-DAILY] hr_daily_wf FAILED for ${runDate}</subject>
+      <body>Workflow ${wf:id()} failed at [${wf:lastErrorNode()}]: ${wf:errorMessage(wf:lastErrorNode())}</body>
+    </email>
+    <ok to="fail"/>
+    <error to="fail"/>
+  </action>
+
+  <kill name="fail">
+    <message>hr_daily_wf failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+  </kill>
+
+  <end name="end"/>
+</workflow-app>

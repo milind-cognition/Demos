@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+spark-warehouse/
+metastore_db/
+derby.log
+# local run outputs
+target/output/
+legacy/publish/*
+!legacy/publish/.gitkeep

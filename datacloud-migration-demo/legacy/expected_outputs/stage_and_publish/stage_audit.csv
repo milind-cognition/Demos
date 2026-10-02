@@ -1,0 +1,4 @@
+load_date,dataset,row_count,distinct_key_count,duplicate_key_count,status
+2024-03-15,departments,50,50,0,OK
+2024-03-15,employees,156,154,2,WARN_DUP_KEYS
+2024-03-15,timecards,185,179,6,WARN_DUP_KEYS

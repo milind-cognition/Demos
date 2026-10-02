@@ -1,0 +1,4 @@
+# Local runtime for the migrated notebooks + validation harness.
+# PySpark 3.5.x matches Databricks Runtime 15.4 LTS (Spark 3.5.0). Requires Java 11 or 17.
+pyspark==3.5.5
+pytest==8.3.4

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  hr_daily_coord : fires hr_daily_wf once a day after the HR + KRONOS SFTP drops land.
+  Landing layout : ${nameNode}/data/landing/hr/<dataset>/dt=YYYY-MM-DD/<dataset>.csv  (+ _SUCCESS from the SFTP poller)
+-->
+<coordinator-app name="hr_daily_coord" frequency="${coord:days(1)}"
+                 start="${coordStart}" end="${coordEnd}" timezone="${timezone}"
+                 xmlns="uri:oozie:coordinator:0.4">
+  <controls>
+    <timeout>480</timeout>
+    <concurrency>1</concurrency>
+    <execution>FIFO</execution>
+    <throttle>3</throttle>
+  </controls>
+
+  <datasets>
+    <dataset name="hr_employees_landing" frequency="${coord:days(1)}"
+             initial-instance="2023-07-01T06:15Z" timezone="${timezone}">
+      <uri-template>${nameNode}/data/landing/hr/employees/dt=${YEAR}-${MONTH}-${DAY}</uri-template>
+      <done-flag>_SUCCESS</done-flag>
+    </dataset>
+    <dataset name="hr_departments_landing" frequency="${coord:days(1)}"
+             initial-instance="2023-07-01T06:15Z" timezone="${timezone}">
+      <uri-template>${nameNode}/data/landing/hr/departments/dt=${YEAR}-${MONTH}-${DAY}</uri-template>
+      <done-flag>_SUCCESS</done-flag>
+    </dataset>
+    <dataset name="kronos_timecards_landing" frequency="${coord:days(1)}"
+             initial-instance="2023-07-01T06:15Z" timezone="${timezone}">
+      <uri-template>${nameNode}/data/landing/hr/timecards/dt=${YEAR}-${MONTH}-${DAY}</uri-template>
+      <done-flag>_SUCCESS</done-flag>
+    </dataset>
+    <dataset name="hr_published" frequency="${coord:days(1)}"
+             initial-instance="2023-07-01T06:15Z" timezone="${timezone}">
+      <uri-template>${nameNode}/data/published/hr/dt=${YEAR}-${MONTH}-${DAY}</uri-template>
+    </dataset>
+  </datasets>
+
+  <input-events>
+    <data-in name="employees_in" dataset="hr_employees_landing">
+      <instance>${coord:current(-1)}</instance>
+    </data-in>
+    <data-in name="departments_in" dataset="hr_departments_landing">
+      <instance>${coord:current(-1)}</instance>
+    </data-in>
+    <data-in name="timecards_in" dataset="kronos_timecards_landing">
+      <instance>${coord:current(-1)}</instance>
+    </data-in>
+  </input-events>
+
+  <output-events>
+    <data-out name="published_out" dataset="hr_published">
+      <instance>${coord:current(-1)}</instance>
+    </data-out>
+  </output-events>
+
+  <action>
+    <workflow>
+      <app-path>${workflowAppPath}</app-path>
+      <configuration>
+        <property>
+          <name>runDate</name>
+          <value>${coord:formatTime(coord:dateOffset(coord:nominalTime(), -1, 'DAY'), 'yyyy-MM-dd')}</value>
+        </property>
+        <property><name>nameNode</name><value>${nameNode}</value></property>
+        <property><name>jobTracker</name><value>${jobTracker}</value></property>
+        <property><name>queueName</name><value>${queueName}</value></property>
+      </configuration>
+    </workflow>
+  </action>
+</coordinator-app>

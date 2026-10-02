@@ -1,0 +1,133 @@
+snapshot_month,dept_id,dept_name,region,headcount_start,headcount_end,hires,terminations,voluntary_terminations,turnover_rate_pct
+2024-01,D101,Payroll Operations,NA-EAST,3,3,0,1,0,33.33
+2024-01,D102,Tax Filing Services,EMEA,1,1,0,0,0,0.00
+2024-01,D104,Client Onboarding,APAC,4,4,0,0,0,0.00
+2024-01,D105,Implementation East,NA-CENTRAL,1,1,0,0,0,0.00
+2024-01,D106,Implementation West,NA-EAST,4,4,0,0,0,0.00
+2024-01,D107,Customer Care Tier 1,EMEA,0,1,1,0,0,0.00
+2024-01,D108,Customer Care Tier 2,NA-WEST,2,2,0,0,0,0.00
+2024-01,D109,Workforce Analytics,APAC,5,5,0,0,0,0.00
+2024-01,D110,Time and Attendance,NA-CENTRAL,3,3,0,0,0,0.00
+2024-01,D111,HR Business Partners,NA-EAST,2,2,0,0,0,0.00
+2024-01,D112,Talent Acquisition,EMEA,2,2,0,0,0,0.00
+2024-01,D113,Learning and Development,NA-WEST,2,2,0,0,0,0.00
+2024-01,D114,Compensation,APAC,4,4,0,0,0,0.00
+2024-01,D115,Retirement Services,NA-CENTRAL,2,2,0,0,0,0.00
+2024-01,D116,Garnishment Processing,NA-EAST,3,3,0,0,0,0.00
+2024-01,D117,Money Movement,EMEA,3,3,0,0,0,0.00
+2024-01,D118,Treasury Operations,NA-WEST,2,2,0,0,0,0.00
+2024-01,D119,General Ledger,APAC,3,3,0,0,0,0.00
+2024-01,D120,Accounts Payable,NA-CENTRAL,4,4,0,0,0,0.00
+2024-01,D122,Financial Planning,EMEA,3,3,0,0,0,0.00
+2024-01,D123,Internal Audit,NA-WEST,2,2,0,0,0,0.00
+2024-01,D124,Compliance Office,APAC,1,1,0,0,0,0.00
+2024-01,D125,Data Privacy,NA-CENTRAL,4,4,0,0,0,0.00
+2024-01,D126,Security Operations,NA-EAST,2,2,0,0,0,0.00
+2024-01,D127,Platform Engineering,EMEA,1,1,0,0,0,0.00
+2024-01,D128,Data Engineering,NA-WEST,2,2,0,0,0,0.00
+2024-01,D129,Mobile Engineering,APAC,3,3,0,0,0,0.00
+2024-01,D130,QA Automation,NA-CENTRAL,2,2,0,0,0,0.00
+2024-01,D131,Release Management,NA-EAST,2,2,0,0,0,0.00
+2024-01,D132,Site Reliability,EMEA,2,2,0,0,0,0.00
+2024-01,D133,Product Management Core,NA-WEST,3,2,0,1,1,40.00
+2024-01,D134,Product Management SMB,APAC,4,4,0,0,0,0.00
+2024-01,D135,UX Research,NA-CENTRAL,2,2,0,0,0,0.00
+2024-01,D136,Technical Writing,NA-EAST,2,2,0,0,0,0.00
+2024-01,D138,Sales Ops EMEA,NA-WEST,1,1,0,0,0,0.00
+2024-01,D139,Partner Channel,APAC,1,1,0,0,0,0.00
+2024-01,D140,Marketing Ops,NA-CENTRAL,2,2,0,0,0,0.00
+2024-01,D141,Field Services North,NA-EAST,3,3,0,0,0,0.00
+2024-01,D143,Print and Mail,NA-WEST,1,2,1,0,0,0.00
+2024-01,D144,Document Imaging,APAC,3,3,0,0,0,0.00
+2024-01,D145,Facilities,NA-CENTRAL,3,3,0,0,0,0.00
+2024-01,D146,Procurement,NA-EAST,5,5,0,0,0,0.00
+2024-01,D148,Executive Office,NA-WEST,3,3,0,0,0,0.00
+2024-01,D149,Legacy Mainframe Support,APAC,1,1,0,0,0,0.00
+2024-02,D101,Payroll Operations,NA-EAST,2,2,0,0,0,0.00
+2024-02,D102,Tax Filing Services,EMEA,1,1,0,0,0,0.00
+2024-02,D104,Client Onboarding,APAC,4,4,0,0,0,0.00
+2024-02,D105,Implementation East,NA-CENTRAL,1,1,0,0,0,0.00
+2024-02,D106,Implementation West,NA-EAST,4,4,0,0,0,0.00
+2024-02,D107,Customer Care Tier 1,EMEA,1,1,0,0,0,0.00
+2024-02,D108,Customer Care Tier 2,NA-WEST,2,2,0,0,0,0.00
+2024-02,D109,Workforce Analytics,APAC,5,5,0,0,0,0.00
+2024-02,D110,Time and Attendance,NA-CENTRAL,3,4,1,0,0,0.00
+2024-02,D111,HR Business Partners,NA-EAST,2,2,0,0,0,0.00
+2024-02,D112,Talent Acquisition,EMEA,2,2,0,0,0,0.00
+2024-02,D113,Learning and Development,NA-WEST,2,2,0,0,0,0.00
+2024-02,D114,Compensation,APAC,4,4,0,0,0,0.00
+2024-02,D115,Retirement Services,NA-CENTRAL,2,2,0,0,0,0.00
+2024-02,D116,Garnishment Processing,NA-EAST,3,3,0,0,0,0.00
+2024-02,D117,Money Movement,EMEA,3,3,0,0,0,0.00
+2024-02,D118,Treasury Operations,NA-WEST,2,3,1,0,0,0.00
+2024-02,D119,General Ledger,APAC,3,3,0,0,0,0.00
+2024-02,D120,Accounts Payable,NA-CENTRAL,4,4,0,0,0,0.00
+2024-02,D122,Financial Planning,EMEA,3,3,0,0,0,0.00
+2024-02,D123,Internal Audit,NA-WEST,2,2,0,0,0,0.00
+2024-02,D124,Compliance Office,APAC,1,1,0,0,0,0.00
+2024-02,D125,Data Privacy,NA-CENTRAL,4,4,0,0,0,0.00
+2024-02,D126,Security Operations,NA-EAST,2,2,0,0,0,0.00
+2024-02,D127,Platform Engineering,EMEA,1,1,0,0,0,0.00
+2024-02,D128,Data Engineering,NA-WEST,2,2,0,0,0,0.00
+2024-02,D129,Mobile Engineering,APAC,3,3,0,0,0,0.00
+2024-02,D130,QA Automation,NA-CENTRAL,2,2,0,0,0,0.00
+2024-02,D131,Release Management,NA-EAST,2,2,0,0,0,0.00
+2024-02,D132,Site Reliability,EMEA,2,2,0,0,0,0.00
+2024-02,D133,Product Management Core,NA-WEST,2,2,0,0,0,0.00
+2024-02,D134,Product Management SMB,APAC,4,4,0,0,0,0.00
+2024-02,D135,UX Research,NA-CENTRAL,2,2,0,0,0,0.00
+2024-02,D136,Technical Writing,NA-EAST,2,2,0,0,0,0.00
+2024-02,D138,Sales Ops EMEA,NA-WEST,1,1,0,0,0,0.00
+2024-02,D139,Partner Channel,APAC,1,1,0,0,0,0.00
+2024-02,D140,Marketing Ops,NA-CENTRAL,2,1,0,1,0,66.67
+2024-02,D141,Field Services North,NA-EAST,3,3,0,1,1,33.33
+2024-02,D143,Print and Mail,NA-WEST,2,2,0,0,0,0.00
+2024-02,D144,Document Imaging,APAC,3,3,0,0,0,0.00
+2024-02,D145,Facilities,NA-CENTRAL,3,3,0,0,0,0.00
+2024-02,D146,Procurement,NA-EAST,5,4,0,1,1,22.22
+2024-02,D148,Executive Office,NA-WEST,3,3,0,0,0,0.00
+2024-02,D149,Legacy Mainframe Support,APAC,1,1,0,0,0,0.00
+2024-03,D101,Payroll Operations,NA-EAST,2,2,0,0,0,0.00
+2024-03,D102,Tax Filing Services,EMEA,2,2,1,0,0,0.00
+2024-03,D104,Client Onboarding,APAC,4,4,0,0,0,0.00
+2024-03,D105,Implementation East,NA-CENTRAL,1,1,0,0,0,0.00
+2024-03,D106,Implementation West,NA-EAST,4,4,0,0,0,0.00
+2024-03,D107,Customer Care Tier 1,EMEA,1,0,0,1,1,200.00
+2024-03,D108,Customer Care Tier 2,NA-WEST,2,2,0,0,0,0.00
+2024-03,D109,Workforce Analytics,APAC,5,5,0,0,0,0.00
+2024-03,D110,Time and Attendance,NA-CENTRAL,4,4,0,0,0,0.00
+2024-03,D111,HR Business Partners,NA-EAST,2,1,0,1,0,66.67
+2024-03,D112,Talent Acquisition,EMEA,2,2,0,0,0,0.00
+2024-03,D113,Learning and Development,NA-WEST,2,2,0,0,0,0.00
+2024-03,D114,Compensation,APAC,4,3,0,1,1,28.57
+2024-03,D115,Retirement Services,NA-CENTRAL,2,2,0,0,0,0.00
+2024-03,D116,Garnishment Processing,NA-EAST,3,3,0,0,0,0.00
+2024-03,D117,Money Movement,EMEA,3,2,0,1,1,40.00
+2024-03,D118,Treasury Operations,NA-WEST,3,3,0,0,0,0.00
+2024-03,D119,General Ledger,APAC,3,3,0,0,0,0.00
+2024-03,D120,Accounts Payable,NA-CENTRAL,4,4,0,0,0,0.00
+2024-03,D122,Financial Planning,EMEA,3,2,0,1,0,40.00
+2024-03,D123,Internal Audit,NA-WEST,2,3,1,0,0,0.00
+2024-03,D124,Compliance Office,APAC,1,2,1,0,0,0.00
+2024-03,D125,Data Privacy,NA-CENTRAL,4,4,0,0,0,0.00
+2024-03,D126,Security Operations,NA-EAST,2,1,0,1,1,66.67
+2024-03,D127,Platform Engineering,EMEA,1,1,0,0,0,0.00
+2024-03,D128,Data Engineering,NA-WEST,2,2,0,0,0,0.00
+2024-03,D129,Mobile Engineering,APAC,3,3,0,0,0,0.00
+2024-03,D130,QA Automation,NA-CENTRAL,2,2,0,0,0,0.00
+2024-03,D131,Release Management,NA-EAST,2,3,1,0,0,0.00
+2024-03,D132,Site Reliability,EMEA,2,2,0,0,0,0.00
+2024-03,D133,Product Management Core,NA-WEST,2,2,0,0,0,0.00
+2024-03,D134,Product Management SMB,APAC,4,3,0,1,1,28.57
+2024-03,D135,UX Research,NA-CENTRAL,2,2,0,0,0,0.00
+2024-03,D136,Technical Writing,NA-EAST,2,2,0,0,0,0.00
+2024-03,D138,Sales Ops EMEA,NA-WEST,1,1,0,0,0,0.00
+2024-03,D139,Partner Channel,APAC,1,1,0,0,0,0.00
+2024-03,D140,Marketing Ops,NA-CENTRAL,1,1,0,0,0,0.00
+2024-03,D141,Field Services North,NA-EAST,2,2,0,0,0,0.00
+2024-03,D143,Print and Mail,NA-WEST,2,2,0,0,0,0.00
+2024-03,D144,Document Imaging,APAC,3,3,0,0,0,0.00
+2024-03,D145,Facilities,NA-CENTRAL,3,3,0,0,0,0.00
+2024-03,D146,Procurement,NA-EAST,4,4,0,0,0,0.00
+2024-03,D148,Executive Office,NA-WEST,3,3,0,0,0,0.00
+2024-03,D149,Legacy Mainframe Support,APAC,1,1,0,0,0,0.00
