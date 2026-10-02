@@ -2,7 +2,7 @@ import { DepartmentTable } from "../components/DepartmentTable";
 import { PageHeader, Panel } from "../components/Panel";
 import { TrendChart } from "../components/TrendChart";
 import { cardConfig } from "../config/metricCards";
-import { formatDelta, formatPeriod, formatValue } from "../lib/format";
+import { displayedChange, formatDelta, formatPeriod, formatValue } from "../lib/format";
 import { summarizeMetric } from "../lib/summary";
 import type { MetricPayload } from "../types";
 
@@ -18,7 +18,7 @@ function Stat({ label, value, tone }: { label: string; value: string; tone?: str
 export function MetricPage({ payload }: { payload: MetricPayload }) {
   const summary = summarizeMetric(payload);
   const first = payload.total[0];
-  const yearChange = summary.latest && first ? summary.latest.value - first.value : null;
+  const yearChange = summary.latest && first ? displayedChange(summary.latest.value, first.value, payload.unit) : null;
   const accent = cardConfig(payload.key).accent;
   return (
     <div className="page">

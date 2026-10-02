@@ -12,6 +12,20 @@ describe("summarizeMetric", () => {
     expect(summary.average).toBeCloseTo(245.33, 2);
   });
 
+  it("is neutral when the change rounds to zero", () => {
+    const summary = summarizeMetric(
+      makePayload({
+        unit: "percent",
+        total: [
+          { period: "2026-08", value: 0.52 },
+          { period: "2026-09", value: 0.48 },
+        ],
+      }),
+    );
+    expect(summary.delta).toBe(0);
+    expect(summary.sentiment).toBe("neutral");
+  });
+
   it("handles a single-period series", () => {
     const summary = summarizeMetric(makePayload({ total: [{ period: "2026-09", value: 1 }] }));
     expect(summary.delta).toBeNull();

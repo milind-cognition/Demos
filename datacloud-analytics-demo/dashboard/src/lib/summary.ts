@@ -1,4 +1,5 @@
-import type { MetricPayload, SeriesPoint } from "../types";
+import type { MetricPayload, MetricUnit, SeriesPoint } from "../types";
+import { displayedChange } from "./format";
 
 export type Sentiment = "positive" | "negative" | "neutral";
 
@@ -15,16 +16,16 @@ export function sentimentFor(delta: number | null, higherIsBetter: boolean): Sen
   return delta > 0 === higherIsBetter ? "positive" : "negative";
 }
 
-export function summarize(series: SeriesPoint[], higherIsBetter: boolean): MetricSummary {
+export function summarize(series: SeriesPoint[], higherIsBetter: boolean, unit: MetricUnit): MetricSummary {
   const latest = series.at(-1);
   const previous = series.at(-2);
-  const delta = latest && previous ? latest.value - previous.value : null;
+  const delta = latest && previous ? displayedChange(latest.value, previous.value, unit) : null;
   const average = series.length ? series.reduce((sum, p) => sum + p.value, 0) / series.length : null;
   return { latest, previous, delta, sentiment: sentimentFor(delta, higherIsBetter), average };
 }
 
 export function summarizeMetric(payload: MetricPayload): MetricSummary {
-  return summarize(payload.total, payload.higher_is_better);
+  return summarize(payload.total, payload.higher_is_better, payload.unit);
 }
 
 export function latestPeriod(payload: MetricPayload): string | undefined {

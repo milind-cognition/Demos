@@ -43,10 +43,24 @@ export function formatValue(value: number, unit: MetricUnit, options: { compact?
   }
 }
 
+const DISPLAY_DECIMALS: Record<MetricUnit, number> = { count: 0, percent: 1, currency: 0, hours: 0, index: 2 };
+
+/** Round to the precision `formatValue` displays for the unit. */
+export function roundForDisplay(value: number, unit: MetricUnit): number {
+  const factor = 10 ** DISPLAY_DECIMALS[unit];
+  return Math.round(value * factor) / factor;
+}
+
+/** `current - previous` as displayed, so a change always agrees with the two values shown beside it. */
+export function displayedChange(current: number, previous: number, unit: MetricUnit): number {
+  return roundForDisplay(roundForDisplay(current, unit) - roundForDisplay(previous, unit), unit);
+}
+
 /** Signed change between two values; percents are reported in percentage points. */
 export function formatDelta(delta: number, unit: MetricUnit): string {
-  const sign = delta > 0 ? "+" : delta < 0 ? "−" : "±";
-  const magnitude = Math.abs(delta);
+  const rounded = roundForDisplay(delta, unit);
+  const sign = rounded > 0 ? "+" : rounded < 0 ? "−" : "±";
+  const magnitude = Math.abs(rounded);
   switch (unit) {
     case "percent":
       return `${sign}${magnitude.toFixed(1)} pts`;

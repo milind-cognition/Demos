@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { formatDelta, formatPeriod, formatPeriodShort, formatValue } from "./format";
+import { displayedChange, formatDelta, formatPeriod, formatPeriodShort, formatValue } from "./format";
 
 describe("formatValue", () => {
   it("formats each unit", () => {
@@ -25,5 +25,18 @@ describe("formatPeriod", () => {
   it("renders YYYY-MM periods", () => {
     expect(formatPeriod("2026-09")).toBe("Sep 2026");
     expect(formatPeriodShort("2025-12")).toBe("Dec ’25");
+  });
+});
+
+describe("displayedChange", () => {
+  it("agrees with the rounded values shown on screen", () => {
+    expect(displayedChange(0.52, 0.48, "percent")).toBe(0);
+    expect(formatDelta(displayedChange(0.52, 0.48, "percent"), "percent")).toBe("±0.0 pts");
+    expect(displayedChange(0.56, 0.44, "percent")).toBe(0.2);
+  });
+
+  it("never renders a signed zero", () => {
+    expect(formatDelta(-0.04, "percent")).toBe("±0.0 pts");
+    expect(formatDelta(0.3, "count")).toBe("±0");
   });
 });

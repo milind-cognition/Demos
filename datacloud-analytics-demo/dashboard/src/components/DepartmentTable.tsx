@@ -5,9 +5,9 @@ import type { MetricPayload } from "../types";
 export function DepartmentTable({ payload }: { payload: MetricPayload }) {
   const rows = payload.by_department.map((dept) => ({
     department: dept.department,
-    ...summarize(dept.series, payload.higher_is_better),
+    ...summarize(dept.series, payload.higher_is_better, payload.unit),
   }));
-  const total = { department: "All Departments", ...summarize(payload.total, payload.higher_is_better) };
+  const total = { department: "All Departments", ...summarize(payload.total, payload.higher_is_better, payload.unit) };
   const latest = payload.periods.at(-1);
   const previous = payload.periods.at(-2);
   return (
