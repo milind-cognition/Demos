@@ -1,5 +1,7 @@
 # INT-1042 — Add an overtime-cost benchmark metric by industry cohort
 
+> Live in Jira as **[MDD-98](https://cog-gtm.atlassian.net/browse/MDD-98)**. This file is the offline copy of the same ticket.
+
 | Field | Value |
 | --- | --- |
 | **Type** | Story |

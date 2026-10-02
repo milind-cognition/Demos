@@ -9,11 +9,12 @@
 
 Implement a new workforce metric in the DataCloud Analytics demo (`datacloud-analytics-demo/` in the `Demos`
 repository) end to end — engine function, tests, registry entry, regenerated JSON, dashboard card, and storyboard —
-and open a reviewed-quality PR. The input is usually a Jira-style ticket in `docs/requirements/`.
+and open a reviewed-quality PR. The input is usually a Jira ticket (e.g. `MDD-98` on cog-gtm.atlassian.net), or a ticket file in `docs/requirements/`.
 
 ## What's Needed From User
 
-- The ticket (a path such as `docs/requirements/INT-1042-overtime-benchmark.md`, or pasted text).
+- The ticket: a Jira key such as `MDD-98` (read it through the Jira integration or Atlassian MCP), a path such as
+  `docs/requirements/INT-1042-overtime-benchmark.md`, or pasted text.
 - Optional: answers to any open questions you raise (see Procedure step 2). If the user doesn't answer, proceed with
   your stated assumptions.
 
@@ -63,7 +64,7 @@ and open a reviewed-quality PR. The input is usually a Jira-style ticket in `doc
     and capture screenshots of the new storyboard and metric page as proof.
 13. **Open the PR** against `main` titled `<TICKET-ID>: <ticket title>`. Description sections: Summary (formula in one
     line), Changes (engine / registry / JSON / dashboard), Verification (commands run + screenshots/recording),
-    **Open questions & assumptions** (from step 2), Out of scope.
+    **Open questions & assumptions** (from step 2), Out of scope. If the ticket is in Jira, comment the PR link on it.
 14. **Review loop.** For each review comment: reply acknowledging it, make the change in a new commit (never
     force-push or amend), re-run step 11 (and step 12 if UI changed), push, and reply on the thread with what changed.
     If a comment renames the metric key, rename it everywhere: registry, module/function name if keyed, tests, JSON

@@ -27,7 +27,7 @@ npm run dev        # → http://localhost:5173
 ## Docs
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — data model, engine contract, and the add-a-metric flow.
-- [`docs/requirements/INT-1042-overtime-benchmark.md`](docs/requirements/INT-1042-overtime-benchmark.md) — the demo ticket.
+- [MDD-98](https://cog-gtm.atlassian.net/browse/MDD-98) — the demo ticket in Jira (offline copy: [`docs/requirements/INT-1042-overtime-benchmark.md`](docs/requirements/INT-1042-overtime-benchmark.md)).
 - [`DEMO_RUNBOOK.md`](DEMO_RUNBOOK.md) — presenter script.
 - [`PLAYBOOK.md`](PLAYBOOK.md) — Devin Playbook for adding a metric.
 - [`AGENTS.md`](AGENTS.md) — commands and conventions for coding agents.
