@@ -9,7 +9,7 @@
 # MAGIC | | |
 # MAGIC |---|---|
 # MAGIC | Inputs | `employees`, `departments` (landing CSV) |
-# MAGIC | Outputs | `turnover_snapshot` (full overwrite, one row per `snapshot_month` x `dept_id`) |
+# MAGIC | Outputs | `turnover_snapshot` (one row per `snapshot_month` x `dept_id`; table sink replaces this quarter) |
 # MAGIC | Workflow | `target/workflows/turnover_snapshot.json` |
 # MAGIC | Owner | hr-data-eng / people-analytics |
 # MAGIC
@@ -23,6 +23,8 @@
 # MAGIC * inner join to `departments`: unknown departments (`D999`) are dropped; `is_active` is ignored
 # MAGIC * `turnover_rate_pct = ROUND(terminations * 100 / ((headcount_start + headcount_end) / 2), 2)`
 # MAGIC   HALF_UP, `0.00` when both headcounts are 0 (so a dept going 1 -> 0 reports `200.00`)
+# MAGIC * **changed vs legacy:** legacy `INSERT OVERWRITE` replaced the whole table; the table sink now
+# MAGIC   uses `replaceWhere snapshot_month IN (<quarter months>)` so a new quarter never wipes a closed one
 # MAGIC * a dept/month row is published only if headcount_start, headcount_end, hires or terminations > 0
 # MAGIC
 # MAGIC Local run / validation (from `datacloud-migration-demo/`):
@@ -151,8 +153,10 @@ turnover_snapshot = turnover.select(*TURNOVER_COLS)
 
 # COMMAND ----------
 
+published_months = io.in_predicate("snapshot_month", [m for m, _, _ in months])
 written = [
-    io.write_output(turnover_snapshot, output_sink, out_dir, table_prefix, "turnover_snapshot", TURNOVER_COLS),
+    io.write_output_replace_where(turnover_snapshot, output_sink, out_dir, table_prefix, "turnover_snapshot",
+                                  TURNOVER_COLS, published_months),
 ]
 for w in written:
     print("[%s] wrote %s" % (JOB, w))
