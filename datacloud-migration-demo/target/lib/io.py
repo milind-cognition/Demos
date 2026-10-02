@@ -24,13 +24,35 @@ INPUT_COLUMNS = {
     ],
 }
 
+EMPLOYEE_SOURCE_ORDER = "_source_order"
+
 
 def input_schema(dataset):
     return StructType([StructField(c, StringType(), True) for c in INPUT_COLUMNS[dataset]])
 
 
 def read_dataset(spark, path, dataset):
-    """Read one landing CSV with its declared schema; blank fields become empty strings."""
+    """Read single-line landing CSVs with explicit schemas and empty strings for blanks.
+
+    Employees are read per file, carrying (file path, line position) provenance for SCD ties.
+    Each employee file must fit in executor memory; files are ordered lexically, then by line.
+    """
+    if dataset == "employees":
+        lines = (
+            spark.read.format("binaryFile").load(path)
+            .select("path", F.posexplode(F.split(F.decode("content", "UTF-8"), r"\r\n|\n|\r"))
+                    .alias("_line_number", "_csv"))
+            .filter((F.col("_line_number") > 0) & F.col("_csv").rlike(r"\S"))
+        )
+        records = lines.select(
+            F.from_csv("_csv", input_schema(dataset).simpleString(), {"mode": "FAILFAST"}).alias("_record"),
+            F.struct(F.col("path").alias("file"), F.col("_line_number").alias("row"))
+            .alias(EMPLOYEE_SOURCE_ORDER),
+        )
+        return records.select(
+            [F.coalesce(F.col("_record." + c), F.lit("")).alias(c) for c in INPUT_COLUMNS[dataset]]
+            + [F.col(EMPLOYEE_SOURCE_ORDER)]
+        )
     df = (
         spark.read.option("header", "true")
         .option("mode", "FAILFAST")

@@ -6,6 +6,8 @@ All hours / money are DecimalType -- never double -- so results are bit-for-bit 
 from pyspark.sql import Window
 from pyspark.sql import functions as F
 
+from target.lib.io import EMPLOYEE_SOURCE_ORDER
+
 HOURS = "decimal(9,2)"
 MONEY = "decimal(18,2)"
 RATE = "decimal(9,2)"
@@ -54,14 +56,23 @@ def bucket_hours(clean_tc, group_cols):
 
 
 def current_employee_version(employees, as_of_date):
-    """Latest SCD record per emp_id with effective_date <= as_of (exact duplicates collapse)."""
-    w = Window.partitionBy("emp_id").orderBy(F.col("effective_date").desc())
+    """Latest eligible SCD record; reader provenance breaks date ties by first CSV occurrence."""
+    ordering = [F.col("effective_date").desc()]
+    if EMPLOYEE_SOURCE_ORDER in employees.columns:
+        columns = [c for c in employees.columns if c != EMPLOYEE_SOURCE_ORDER]
+        employees = employees.groupBy(*columns).agg(
+            F.min(EMPLOYEE_SOURCE_ORDER).alias(EMPLOYEE_SOURCE_ORDER),
+        )
+        ordering.append(F.col(EMPLOYEE_SOURCE_ORDER).asc())
+    else:
+        employees = employees.dropDuplicates()
+    w = Window.partitionBy("emp_id").orderBy(*ordering)
     return (
-        employees.dropDuplicates()
+        employees
         .filter(F.col("effective_date") <= F.lit(as_of_date.isoformat()))
         .withColumn("_rn", F.row_number().over(w))
         .filter(F.col("_rn") == 1)
-        .drop("_rn")
+        .drop("_rn", EMPLOYEE_SOURCE_ORDER)
     )
 
 

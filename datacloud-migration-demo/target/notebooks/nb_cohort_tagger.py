@@ -14,7 +14,8 @@
 # MAGIC | Owner | hr-data-eng |
 # MAGIC
 # MAGIC **Legacy behaviour preserved on purpose** (see `legacy/README.md` → *Known quirks*):
-# MAGIC * employee version current at `run_date`; active means blank termination or `term_date > run_date`
+# MAGIC * employee version current at `run_date`; same-date ties retain the first CSV record
+# MAGIC * active means blank termination or `term_date > run_date`
 # MAGIC * no hire-date cutoff; unknown departments (`D999`) kept without a department join
 # MAGIC * latest timecard correction wins before approval/date filtering; codes are trimmed and uppercased
 # MAGIC * OT = OT + DT over the Mon–Fri pay week; employees without matching cards have `0.00` OT
