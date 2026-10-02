@@ -101,6 +101,9 @@
         "source": "GIT",
         "base_parameters": {
           "run_date": "{{job.parameters.run_date}}",
+          "period_start": "",
+          "period_end": "",
+          "as_of_date": "",
           "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
           "output_sink": "table",
           "table_prefix": "{{job.parameters.table_prefix}}",
@@ -163,6 +166,8 @@
         "source": "GIT",
         "base_parameters": {
           "run_date": "{{job.parameters.run_date}}",
+          "period_start": "",
+          "period_end": "",
           "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
           "output_sink": "table",
           "table_prefix": "{{job.parameters.table_prefix}}",
@@ -208,6 +213,7 @@
         "source": "GIT",
         "base_parameters": {
           "run_date": "{{job.parameters.run_date}}",
+          "snapshot_as_of": "",
           "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
           "output_sink": "table",
           "table_prefix": "{{job.parameters.table_prefix}}",
