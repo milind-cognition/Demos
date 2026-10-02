@@ -1,6 +1,8 @@
 import csv
 import datetime as dt
 
+import pytest
+
 from target.lib import hr_transforms as hr, io
 
 
@@ -28,3 +30,17 @@ def test_employee_source_order_survives_shuffle_and_exact_duplicates(spark, tmp_
     result = selected.collect()
     assert len(result) == 1
     assert result[0].dept_id == "Z99" and result[0].term_date == ""
+
+
+def test_oversized_employee_file_rejected_before_loading_content(spark, tmp_path, monkeypatch):
+    path = tmp_path / "employees.csv"
+    path.write_text("x" * 17)
+    monkeypatch.setattr(io, "MAX_EMPLOYEE_FILE_BYTES", 16)
+    config = "spark.sql.sources.binaryFile.maxLength"
+    previous = spark.conf.get(config)
+    spark.conf.set(config, "1")
+    try:
+        with pytest.raises(ValueError, match="at most 16 bytes each.*ordered CSV shards"):
+            io.read_dataset(spark, str(path), "employees")
+    finally:
+        spark.conf.set(config, previous)

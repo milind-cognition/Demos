@@ -25,6 +25,7 @@ INPUT_COLUMNS = {
 }
 
 EMPLOYEE_SOURCE_ORDER = "_source_order"
+MAX_EMPLOYEE_FILE_BYTES = 16 * 1024 * 1024
 
 
 def input_schema(dataset):
@@ -35,11 +36,17 @@ def read_dataset(spark, path, dataset):
     """Read single-line landing CSVs with explicit schemas and empty strings for blanks.
 
     Employees are read per file, carrying (file path, line position) provenance for SCD ties.
-    Each employee file must fit in executor memory; files are ordered lexically, then by line.
+    Employee files are limited to 16 MiB; larger feeds need shards ordered lexically, then by line.
     """
     if dataset == "employees":
+        files = spark.read.format("binaryFile").load(path)
+        if files.select("length").filter(F.col("length") > MAX_EMPLOYEE_FILE_BYTES).limit(1).count():
+            raise ValueError(
+                "employee CSV files must be at most %d bytes each; "
+                "split larger feeds into lexically ordered CSV shards" % MAX_EMPLOYEE_FILE_BYTES
+            )
         lines = (
-            spark.read.format("binaryFile").load(path)
+            files
             .select("path", F.posexplode(F.split(F.decode("content", "UTF-8"), r"\r\n|\n|\r"))
                     .alias("_line_number", "_csv"))
             .filter((F.col("_line_number") > 0) & F.col("_csv").rlike(r"\S"))
