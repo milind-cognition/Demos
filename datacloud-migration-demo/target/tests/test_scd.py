@@ -41,3 +41,21 @@ def test_employed_on_both_active_definitions(spark):
     inclusive = sorted(r.emp_id for r in df.filter(scd.employed_on(day, terminated_on_day_is_active=True)).collect())
     assert strict == ["A"]
     assert inclusive == ["A", "B"]
+
+
+def test_scd2_versions_same_day_records_are_deterministic(spark):
+    rows = [("E1", "D2", "2020-01-01", "", "2024-03-11"), ("E1", "D1", "2020-01-01", "", "2024-03-11")]
+    for ordered in (rows, rows[::-1]):
+        out = scd.scd2_versions(spark.createDataFrame(ordered, EMP_COLS), dt.date(2024, 3, 15))
+        got = sorted((r.employee_sk, r.dept_id, r.is_current) for r in out.collect())
+        assert got == [(1, "D1", "N"), (2, "D2", "Y")]
+
+
+def test_malformed_hr_dates_do_not_fail_under_ansi(spark):
+    assert spark.conf.get("spark.sql.ansi.enabled") == "true"
+    rows = [("E1", "D1", "unknown", "", "2024-01-01"), ("E2", "D1", "2024-01-01", "n/a", "2024-01-01"),
+            ("E3", "D1", "2024-01-01", "", "2024-13-45")]
+    dim = scd.scd2_versions(spark.createDataFrame(rows, EMP_COLS), dt.date(2024, 3, 15))
+    day = F.lit(dt.date(2024, 3, 12))
+    got = sorted(r.emp_id for r in dim.filter(scd.valid_on(day) & scd.employed_on(day)).collect())
+    assert got == ["E2"]  # E1 'unknown' > day lexically; E2 'n/a' > day; E3 has no valid window
