@@ -39,6 +39,7 @@ def test_top_level_shape():
     assert SPEC["name"] == "hr_daily.hr_daily"
     assert SPEC["format"] == "MULTI_TASK"
     assert SPEC["max_concurrent_runs"] == 1
+    assert SPEC["timeout_seconds"] <= 7200, "run_daily.sh failed the batch after a 2h Oozie poll"
     assert SPEC["queue"]["enabled"] is True
     assert SPEC["schedule"]["pause_status"] == "PAUSED"
     assert SPEC["email_notifications"]["on_failure"]
