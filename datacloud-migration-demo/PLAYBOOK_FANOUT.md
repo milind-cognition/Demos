@@ -1,4 +1,4 @@
-<!-- Saved in Devin as playbook "EMR → Databricks migration wave (fan-out)", macro !migrate_wave.
+<!-- Saved in Devin as playbook "EMR → Databricks migration wave (fan-out)", macro !databricks_migration.
      Paste everything below the line if you need to recreate it. -->
 
 ---

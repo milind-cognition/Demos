@@ -19,7 +19,7 @@ is the long version.
 | 5. Review (5 min) | One PR side by side with the legacy SQL; the validator output in the PR; the coordinator's summary table of all PRs | "You review evidence (an exact data match), not vibes." |
 
 ```
-!migrate_wave Launch the datacloud-migration-demo migration wave for milind-cognition/Demos.
+!databricks_migration Launch the datacloud-migration-demo migration wave for milind-cognition/Demos.
 ```
 
 The wave launches five sessions (emp_metrics_daily, turnover_snapshot, cohort_tagger,
@@ -141,7 +141,7 @@ Devin finds it. To be explicit, prefix the prompt with `In datacloud-migration-d
 **One-prompt option (recommended on stage):** paste this into a single new session and it launches
 the four sessions below for you, then reports a PR/validation table:
 ```
-!migrate_wave Launch the datacloud-migration-demo migration wave for milind-cognition/Demos. Skip emp_metrics_daily; it is already in flight from Act 2.
+!databricks_migration Launch the datacloud-migration-demo migration wave for milind-cognition/Demos. Skip emp_metrics_daily; it is already in flight from Act 2.
 ```
 
 **Manual option:** launch **4 parallel Devin sessions** (one per job). Use the Playbook macro so every session gets the
