@@ -44,7 +44,9 @@ export function Sidebar({ route, metrics, activeStoryboardId }: SidebarProps) {
             className={`nav-link${route.name === "metric" && route.key === metric.key ? " is-active" : ""}`}
           >
             {metric.label}
-            <code className="nav-link__key">{metric.key}</code>
+            <code className="nav-link__key" title={metric.key}>
+              {metric.key}
+            </code>
           </a>
         ))}
       </nav>
