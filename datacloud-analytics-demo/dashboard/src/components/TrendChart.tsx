@@ -4,9 +4,11 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   Legend,
   Line,
   LineChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -14,12 +16,14 @@ import {
 } from "recharts";
 
 import type { ChartKind } from "../config/storyboards";
+import { benchmarkLatest } from "../lib/benchmark";
 import { formatPeriod, formatPeriodShort, formatValue } from "../lib/format";
 import type { MetricPayload } from "../types";
 
 const DEPARTMENT_PALETTE = ["#3e63dd", "#0e7c86", "#6e56cf", "#c2410c", "#4d7c0f", "#be185d", "#475467", "#a16207"];
 const AXIS = { stroke: "#98a2b3", fontSize: 12 };
 const GRID = "#eaecf0";
+const FLAGGED = "#b42318";
 
 export interface TrendChartProps {
   payload: MetricPayload;
@@ -137,12 +141,62 @@ function LatestBreakdown({ payload, accent, height }: Required<Omit<TrendChartPr
   );
 }
 
+function CompanyBenchmark({ payload, accent, height }: Required<Omit<TrendChartProps, "kind">>) {
+  const { period, company, rows } = benchmarkLatest(payload);
+  const flagged = rows.filter((r) => r.flagged);
+  return (
+    <>
+      <ResponsiveContainer width="100%" height={height}>
+        <BarChart data={rows} layout="vertical" margin={{ top: 20, right: 24, bottom: 0, left: 8 }}>
+          <CartesianGrid stroke={GRID} horizontal={false} />
+          <XAxis
+            type="number"
+            tickFormatter={(v: number) => formatValue(v, payload.unit, { compact: true })}
+            tickLine={false}
+            axisLine={false}
+            tick={AXIS}
+          />
+          <YAxis type="category" dataKey="department" width={170} tickLine={false} axisLine={false} tick={AXIS} />
+          <Tooltip
+            cursor={{ fill: "#f2f4f7" }}
+            formatter={(value) => [formatValue(Number(value), payload.unit), period ? formatPeriod(period) : ""]}
+          />
+          <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={14}>
+            {rows.map((row) => (
+              <Cell key={row.department} fill={row.flagged ? FLAGGED : accent} />
+            ))}
+          </Bar>
+          {company !== undefined && (
+            <ReferenceLine
+              x={company}
+              stroke="#344054"
+              strokeDasharray="4 3"
+              label={{ value: `Company ${formatValue(company, payload.unit)}`, position: "top", fontSize: 12, fill: "#344054" }}
+            />
+          )}
+        </BarChart>
+      </ResponsiveContainer>
+      <p className="chart__flags" data-testid={`flags-${payload.key}`}>
+        {flagged.length ? (
+          <>
+            <span className="chart__flag-swatch" style={{ background: FLAGGED }} aria-hidden="true" />
+            Above company-wide: {flagged.map((r) => r.department).join(", ")}
+          </>
+        ) : (
+          "No group is above the company-wide value."
+        )}
+      </p>
+    </>
+  );
+}
+
 export function TrendChart({ payload, kind = "trend", accent = "#3e63dd", height = 260 }: TrendChartProps) {
   return (
     <div className="chart" data-testid={`chart-${payload.key}-${kind}`}>
       {kind === "trend" && <TotalTrend payload={payload} accent={accent} height={height} />}
       {kind === "departments" && <DepartmentLines payload={payload} height={height} />}
       {kind === "breakdown" && <LatestBreakdown payload={payload} accent={accent} height={height} />}
+      {kind === "benchmark" && <CompanyBenchmark payload={payload} accent={accent} height={height} />}
     </div>
   );
 }

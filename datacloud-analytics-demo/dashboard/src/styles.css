@@ -57,7 +57,10 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 }
 .nav-link:hover { background: var(--neutral-bg); color: var(--text); }
 .nav-link.is-active { background: #eef2ff; color: #2d3f8f; }
-.nav-link__key { color: var(--text-subtle); font-size: 11px; }
+.nav-link__key {
+  flex: 0 1 auto; min-width: 0; max-width: 50%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: var(--text-subtle); font-size: 11px;
+}
 .sidebar__footer {
   margin-top: auto; display: flex; align-items: center; gap: 8px;
   padding: 10px; font-size: 12px; color: var(--text-subtle); border-top: 1px solid var(--border);
@@ -110,6 +113,8 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 .panel__title { margin: 0; font-size: 15px; font-weight: 600; }
 .panel__subtitle { margin: 2px 0 0; color: var(--text-subtle); font-size: 13px; }
 .chart { width: 100%; min-height: 1px; }
+.chart__flags { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 12px; color: var(--text-muted); }
+.chart__flag-swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
 
 /* Stats */
 .stat-row {

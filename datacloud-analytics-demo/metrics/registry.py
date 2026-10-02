@@ -17,6 +17,7 @@ import pandas as pd
 
 from metrics.headcount import compute_headcount
 from metrics.overtime import compute_overtime
+from metrics.overtime_cost_per_employee import compute_overtime_cost_per_employee
 from metrics.turnover import compute_turnover
 
 Unit = Literal["count", "percent", "currency", "hours", "index"]
@@ -59,6 +60,14 @@ _DEFINITIONS: tuple[MetricDefinition, ...] = (
         unit="percent",
         higher_is_better=False,
         compute=compute_overtime,
+    ),
+    MetricDefinition(
+        key="overtime_cost_per_employee",
+        label="Overtime Cost per Employee",
+        description="Overtime pay at 1.5x hourly rate divided by active employees, by industry cohort.",
+        unit="currency",
+        higher_is_better=False,
+        compute=compute_overtime_cost_per_employee,
     ),
 )
 
