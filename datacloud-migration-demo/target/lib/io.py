@@ -32,13 +32,15 @@ def input_schema(dataset):
     return StructType([StructField(c, StringType(), True) for c in INPUT_COLUMNS[dataset]])
 
 
-def read_dataset(spark, path, dataset):
-    """Read single-line landing CSVs with explicit schemas and empty strings for blanks.
+def read_dataset(spark, path, dataset, *, preserve_source_order=False):
+    """Read landing CSVs with explicit business schemas and empty strings for blanks.
 
-    Employees are read per file, carrying (file path, line position) provenance for SCD ties.
-    Employee files are limited to 16 MiB; larger feeds need shards ordered lexically, then by line.
+    Opt-in employee provenance carries (file path, line position) for first-record SCD ties.
+    That mode reads single-line files up to 16 MiB; larger feeds need lexically ordered shards.
     """
-    if dataset == "employees":
+    if preserve_source_order:
+        if dataset != "employees":
+            raise ValueError("source ordering is only supported for employees")
         files = spark.read.format("binaryFile").load(path)
         if files.select("length").filter(F.col("length") > MAX_EMPLOYEE_FILE_BYTES).limit(1).count():
             raise ValueError(

@@ -92,7 +92,7 @@ print("[%s] run_date=%s period=%s..%s input_root=%s sink=%s"
 
 spark = get_spark("hr_daily." + JOB)
 
-employees = io.read_dataset(spark, paths.input_path(input_root, "employees"), "employees")
+employees = io.read_dataset(spark, paths.input_path(input_root, "employees"), "employees", preserve_source_order=True)
 timecards = io.read_dataset(spark, paths.input_path(input_root, "timecards"), "timecards")
 
 # COMMAND ----------

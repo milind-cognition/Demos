@@ -6,6 +6,21 @@ import pytest
 from target.lib import hr_transforms as hr, io
 
 
+def test_default_employee_reader_preserves_business_schema_and_duplicate_semantics(spark, tmp_path, monkeypatch):
+    path = tmp_path / "employees.csv"
+    row = dict(emp_id="E1", dept_id="D1", effective_date="2024-03-01")
+    with path.open("w", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=io.INPUT_COLUMNS["employees"])
+        writer.writeheader()
+        writer.writerows([row, row])
+    monkeypatch.setattr(io, "MAX_EMPLOYEE_FILE_BYTES", 1)
+    employees = io.read_dataset(spark, str(path), "employees")
+    assert employees.columns == io.INPUT_COLUMNS["employees"]
+    assert employees.count() == 2
+    assert employees.dropDuplicates().count() == 1
+    assert employees.select("emp_id", "effective_date").distinct().count() == 1
+
+
 def test_employee_source_order_survives_shuffle_and_exact_duplicates(spark, tmp_path):
     path = tmp_path / "employees.csv"
     first = dict(emp_id="E1", dept_id="Z99", effective_date="2024-03-01",
@@ -19,7 +34,7 @@ def test_employee_source_order_survives_shuffle_and_exact_duplicates(spark, tmp_
         stream.write("\r\n")
         writer.writerows([second, first, dict(first, effective_date="2024-04-01")])
 
-    employees = io.read_dataset(spark, str(path), "employees")
+    employees = io.read_dataset(spark, str(path), "employees", preserve_source_order=True)
     assert "_source_order" in employees.columns
     records = employees.orderBy("_source_order").collect()
     assert [r._source_order.row for r in records] == [1, 3, 4, 5]
@@ -41,6 +56,6 @@ def test_oversized_employee_file_rejected_before_loading_content(spark, tmp_path
     spark.conf.set(config, "1")
     try:
         with pytest.raises(ValueError, match="at most 16 bytes each.*ordered CSV shards"):
-            io.read_dataset(spark, str(path), "employees")
+            io.read_dataset(spark, str(path), "employees", preserve_source_order=True)
     finally:
         spark.conf.set(config, previous)
