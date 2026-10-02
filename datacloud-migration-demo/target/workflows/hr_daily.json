@@ -1,6 +1,6 @@
 {
   "name": "hr_daily.hr_daily",
-  "description": "HR daily batch orchestration. Migrated from legacy/oozie/coordinator.xml + workflow.xml + job.properties (hr_daily_coord / hr_daily_wf: stage -> emp_metrics_daily -> payroll_join, email on failure) and the tail of legacy/shell/run_daily.sh (CohortTagger, month-close turnover_snapshot). The coordinator's _SUCCESS done-flag wait on the three landing datasets is replaced by the upstream HR/KRONOS feed SLA (landing volume populated before 06:15 America/New_York); run_daily.sh 'publish' is replaced by output_sink=table (Unity Catalog tables under table_prefix are the published contract).",
+  "description": "HR daily batch orchestration. Migrated from legacy/oozie/coordinator.xml + workflow.xml + job.properties (hr_daily_coord / hr_daily_wf: stage -> emp_metrics_daily -> payroll_join, email on failure) and the tail of legacy/shell/run_daily.sh (CohortTagger, month-close turnover_snapshot). The coordinator's _SUCCESS done-flag wait on the three landing datasets is replaced by the upstream HR/KRONOS feed SLA (landing volume populated before 06:15 America/New_York); run_daily.sh 'publish' is replaced by output_sink=table (Unity Catalog tables under table_prefix are the published contract). Backfills overriding run_date must also pass run_day_of_month (run_date's day of month) for the month-close gate.",
   "tags": {
     "domain": "hr",
     "team": "hr-data-eng",
@@ -181,7 +181,7 @@
     },
     {
       "task_key": "is_month_close",
-      "description": "run_daily.sh step 4 gate: `date -d $RUN_DATE +%d == 01 || FORCE_TURNOVER == 1`. Numeric <= 1 so '1' and '01' both match; force with run_day_of_month=1.",
+      "description": "run_daily.sh step 4 gate: `date -d $RUN_DATE +%d == 01 || FORCE_TURNOVER == 1`. Numeric <= 1 so '1' and '01' both match; force with run_day_of_month=1. run_day_of_month defaults to the job start day, not run_date: a backfill that overrides run_date must also set run_day_of_month to run_date's day of month.",
       "depends_on": [
         {
           "task_key": "cohort_tagger"
