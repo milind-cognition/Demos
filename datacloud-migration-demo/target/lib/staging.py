@@ -10,6 +10,8 @@ reproduces the shell pipeline line-for-line:
 * ``... | cut -d, -f<keycols> | sort -u | wc -l``            -> ``distinct_key_count``
   (raw comma split like ``cut``: no CSV quote handling, no trimming)
 """
+import posixpath
+
 from pyspark.errors import AnalysisException
 from pyspark.sql import functions as F
 
@@ -57,6 +59,9 @@ def read_feed_lines(spark, path):
         raw = spark.read.option("lineSep", "\n").text(path)
     except AnalysisException as exc:
         raise FileNotFoundError("missing inbound file %s" % path) from exc
+    files = raw.inputFiles()
+    if len(files) != 1 or posixpath.basename(files[0].rstrip("/")) != posixpath.basename(path.rstrip("/")):
+        raise FileNotFoundError("inbound path %s is not a single regular file (found %d files)" % (path, len(files)))
     return raw.select(F.regexp_replace("value", "\r", "").alias("value"))
 
 

@@ -49,6 +49,14 @@ def test_read_feed_lines_missing_file(spark, tmp_path):
         staging.read_feed_lines(spark, str(tmp_path / "nope.csv"))
 
 
+def test_read_feed_lines_rejects_directory(spark, tmp_path):
+    d = tmp_path / "departments.csv"
+    d.mkdir()
+    (d / "part-0").write_text(SHELL_EXPECTED["departments"] + "\nD1,a,b,c,d,Y\n")
+    with pytest.raises(FileNotFoundError, match="not a single regular file"):
+        staging.read_feed_lines(spark, str(d))
+
+
 def test_audit_counts_and_dup_status(spark):
     r = _audit(spark, "departments", [SHELL_EXPECTED["departments"], "D1,a", "D2,b", "D1,c", "   ", ""])
     assert r == {"load_date": "2024-03-15", "dataset": "departments", "row_count": 3, "distinct_key_count": 2,
