@@ -24,13 +24,44 @@ INPUT_COLUMNS = {
     ],
 }
 
+EMPLOYEE_SOURCE_ORDER = "_source_order"
+MAX_EMPLOYEE_FILE_BYTES = 16 * 1024 * 1024
+
 
 def input_schema(dataset):
     return StructType([StructField(c, StringType(), True) for c in INPUT_COLUMNS[dataset]])
 
 
-def read_dataset(spark, path, dataset):
-    """Read one landing CSV with its declared schema; blank fields become empty strings."""
+def read_dataset(spark, path, dataset, *, preserve_source_order=False):
+    """Read landing CSVs with explicit business schemas and empty strings for blanks.
+
+    Opt-in employee provenance carries (file path, line position) for first-record SCD ties.
+    That mode reads single-line files up to 16 MiB; larger feeds need lexically ordered shards.
+    """
+    if preserve_source_order:
+        if dataset != "employees":
+            raise ValueError("source ordering is only supported for employees")
+        files = spark.read.format("binaryFile").load(path)
+        if files.select("length").filter(F.col("length") > MAX_EMPLOYEE_FILE_BYTES).limit(1).count():
+            raise ValueError(
+                "employee CSV files must be at most %d bytes each; "
+                "split larger feeds into lexically ordered CSV shards" % MAX_EMPLOYEE_FILE_BYTES
+            )
+        lines = (
+            files
+            .select("path", F.posexplode(F.split(F.decode("content", "UTF-8"), r"\r\n|\n|\r"))
+                    .alias("_line_number", "_csv"))
+            .filter((F.col("_line_number") > 0) & F.col("_csv").rlike(r"\S"))
+        )
+        records = lines.select(
+            F.from_csv("_csv", input_schema(dataset).simpleString(), {"mode": "FAILFAST"}).alias("_record"),
+            F.struct(F.col("path").alias("file"), F.col("_line_number").alias("row"))
+            .alias(EMPLOYEE_SOURCE_ORDER),
+        )
+        return records.select(
+            [F.coalesce(F.col("_record." + c), F.lit("")).alias(c) for c in INPUT_COLUMNS[dataset]]
+            + [F.col(EMPLOYEE_SOURCE_ORDER)]
+        )
     df = (
         spark.read.option("header", "true")
         .option("mode", "FAILFAST")
