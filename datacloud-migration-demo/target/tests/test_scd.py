@@ -59,3 +59,10 @@ def test_malformed_hr_dates_do_not_fail_under_ansi(spark):
     day = F.lit(dt.date(2024, 3, 12))
     got = sorted(r.emp_id for r in dim.filter(scd.valid_on(day) & scd.employed_on(day)).collect())
     assert got == ["E2"]  # E1 'unknown' > day lexically; E2 'n/a' > day; E3 has no valid window
+
+
+def test_scd2_versions_excludes_invalid_effective_dates(spark):
+    rows = [("E1", "D1", "2020-01-01", "", "2024-01-01"), ("E1", "D2", "2020-01-01", "", "2024-02-30")]
+    out = scd.scd2_versions(spark.createDataFrame(rows, EMP_COLS), dt.date(2024, 3, 15))
+    got = [(r.employee_sk, r.dept_id, r.eff_end_date, r.is_current) for r in out.collect()]
+    assert got == [(1, "D1", scd.OPEN_END_DATE, "Y")]
