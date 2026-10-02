@@ -1,0 +1,95 @@
+{
+  "name": "hr_daily.payroll_join",
+  "description": "Weekly gross-pay estimate per hourly associate + cost-center GL accrual rollup. Migrated from legacy/pig/payroll_join.pig (Oozie hr_daily_wf action payroll_join).",
+  "tags": {
+    "domain": "hr",
+    "team": "payroll-analytics",
+    "source_system": "emr-hr-prod",
+    "legacy_artifact": "pig/payroll_join.pig",
+    "migration_wave": "wave-1",
+    "cost_center": "CC-4429"
+  },
+  "parameters": [
+    { "name": "run_date", "default": "{{job.start_time.iso_date}}" },
+    { "name": "table_prefix", "default": "hr_prod.hr" }
+  ],
+  "git_source": {
+    "git_url": "https://github.com/milind-cognition/Demos",
+    "git_provider": "gitHub",
+    "git_branch": "main"
+  },
+  "job_clusters": [
+    {
+      "job_cluster_key": "hr_batch_small",
+      "new_cluster": {
+        "spark_version": "15.4.x-scala2.12",
+        "node_type_id": "m6gd.xlarge",
+        "driver_node_type_id": "m6gd.xlarge",
+        "autoscale": { "min_workers": 1, "max_workers": 4 },
+        "data_security_mode": "SINGLE_USER",
+        "runtime_engine": "STANDARD",
+        "spark_conf": {
+          "spark.sql.session.timeZone": "UTC",
+          "spark.sql.ansi.enabled": "true",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "availability": "SPOT_WITH_FALLBACK",
+          "first_on_demand": 1,
+          "zone_id": "auto",
+          "instance_profile_arn": "arn:aws:iam::000000000000:instance-profile/dbx-hr-batch"
+        },
+        "custom_tags": {
+          "CostCenter": "CC-4429",
+          "Workload": "hr_daily",
+          "DataClassification": "PII-CONFIDENTIAL"
+        },
+        "enable_elastic_disk": true
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "payroll_join",
+      "description": "nb_payroll_join -> payroll_by_employee, payroll_by_cost_center",
+      "job_cluster_key": "hr_batch_small",
+      "notebook_task": {
+        "notebook_path": "datacloud-migration-demo/target/notebooks/nb_payroll_join",
+        "source": "GIT",
+        "base_parameters": {
+          "run_date": "{{job.parameters.run_date}}",
+          "period_start": "",
+          "period_end": "",
+          "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
+          "output_sink": "table",
+          "table_prefix": "{{job.parameters.table_prefix}}",
+          "validate": "false"
+        }
+      },
+      "timeout_seconds": 3600,
+      "max_retries": 2,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "email_notifications": {
+        "on_failure": ["hr-data-eng@acme-hcm.com"]
+      }
+    }
+  ],
+  "schedule": {
+    "quartz_cron_expression": "0 30 6 ? * MON-FRI",
+    "timezone_id": "America/New_York",
+    "pause_status": "PAUSED"
+  },
+  "email_notifications": {
+    "on_failure": ["hr-data-eng@acme-hcm.com", "payroll-analytics@acme-hcm.com"],
+    "no_alert_for_skipped_runs": true
+  },
+  "health": {
+    "rules": [{ "metric": "RUN_DURATION_SECONDS", "op": "GREATER_THAN", "value": 2700 }]
+  },
+  "timeout_seconds": 7200,
+  "max_concurrent_runs": 1,
+  "queue": { "enabled": true },
+  "run_as": { "service_principal_name": "3f2b6c1e-8a4d-4e7b-9c1a-5d6e7f8a9b0c" },
+  "format": "MULTI_TASK"
+}
