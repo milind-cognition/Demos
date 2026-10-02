@@ -5,6 +5,28 @@
 **Repo:** `https://github.com/milind-cognition/Demos` → folder `datacloud-migration-demo/` (every
 path below is relative to it).
 
+## Quick version — one prompt, ~15 min
+
+Use this when you want the whole story driven by a single prompt. The full four-act script below
+is the long version.
+
+| Step | Show | Say |
+|---|---|---|
+| 1. Pain (2 min) | `legacy/`: duplicated timecard logic in `hive/emp_metrics_daily.sql`, `pig/payroll_join.pig`, `java/CohortTagger.java`; hard-coded `2024-03-15`; `shell/run_daily.sh` sleep/poll/email loop | "Every enterprise has this, and nobody touches it because nobody can prove a rewrite is correct." |
+| 2. Guardrails (2 min) | `target/MIGRATION_STANDARDS.md`, `nb_payroll_join.py`, then `python3 scripts/validate.py payroll_join` → PASS | "Devin gets the rules and the worked example a senior engineer would get, plus an objective definition of done." |
+| 3. One prompt (1 min to launch) | Paste the prompt below into one new Devin session | "One request, five engineers working in parallel, one shared playbook." |
+| 4. Watch (5 min) | The coordinator's session list; click into one child to see its plan and the validator running | "Each session reads the legacy job, reuses the shared library, and proves itself against the golden data." |
+| 5. Review (5 min) | One PR side by side with the legacy SQL; the validator output in the PR; the coordinator's summary table of all PRs | "You review evidence (an exact data match), not vibes." |
+
+```
+!migrate_wave Launch the datacloud-migration-demo migration wave for milind-cognition/Demos.
+```
+
+The wave launches five sessions (emp_metrics_daily, turnover_snapshot, cohort_tagger,
+stage_and_publish, Oozie → `hr_daily.json`). It skips any job that already has a notebook on `main`.
+
+---
+
 ## Pre-flight (T-30 min)
 
 1. `main` contains only the `payroll_join` exemplar migration:
@@ -119,7 +141,7 @@ Devin finds it. To be explicit, prefix the prompt with `In datacloud-migration-d
 **One-prompt option (recommended on stage):** paste this into a single new session and it launches
 the four sessions below for you, then reports a PR/validation table:
 ```
-!migrate_wave Launch the datacloud-migration-demo Act 4 migration wave for milind-cognition/Demos.
+!migrate_wave Launch the datacloud-migration-demo migration wave for milind-cognition/Demos. Skip emp_metrics_daily; it is already in flight from Act 2.
 ```
 
 **Manual option:** launch **4 parallel Devin sessions** (one per job). Use the Playbook macro so every session gets the

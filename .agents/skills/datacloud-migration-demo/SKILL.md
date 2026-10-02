@@ -27,4 +27,4 @@ python3 scripts/validate.py --all
 python3 -m pytest -q target/tests
 flake8
 ```
-Then open a PR against `main` with the validate output in the description. Playbooks: `!migrate_job` (one job), `!migrate_wave` (Act 4 fan-out).
+Then open a PR against `main` with the validate output in the description. Playbooks: `!migrate_job` (one job), `!migrate_wave` (parallel wave across all remaining jobs).
