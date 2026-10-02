@@ -1,0 +1,50 @@
+name: datacloud-analytics-demo
+
+on:
+  push:
+    branches: [main]
+    paths: ["datacloud-analytics-demo/**", ".github/workflows/datacloud-analytics-demo.yml"]
+  pull_request:
+    paths: ["datacloud-analytics-demo/**", ".github/workflows/datacloud-analytics-demo.yml"]
+
+defaults:
+  run:
+    working-directory: datacloud-analytics-demo
+
+jobs:
+  engine:
+    name: Metrics engine (pytest + JSON freshness)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+          cache-dependency-path: datacloud-analytics-demo/requirements.txt
+      - run: pip install -r requirements.txt
+      - run: python -m pytest
+      - name: Generated metric JSON is up to date
+        run: |
+          python scripts/compute_metrics.py
+          git diff --exit-code -- dashboard/public/metrics \
+            || (echo "::error::Run scripts/compute_metrics.py and commit the output" && exit 1)
+          test -z "$(git status --porcelain -- dashboard/public/metrics)" \
+            || (echo "::error::Untracked metric JSON; commit the output of scripts/compute_metrics.py" && exit 1)
+
+  dashboard:
+    name: Dashboard (vitest + build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: datacloud-analytics-demo/dashboard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: datacloud-analytics-demo/dashboard/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
