@@ -1,0 +1,260 @@
+{
+  "name": "hr_daily.hr_daily",
+  "description": "HR daily batch orchestration. Migrated from legacy/oozie/coordinator.xml + workflow.xml + job.properties (hr_daily_coord / hr_daily_wf: stage -> emp_metrics_daily -> payroll_join, email on failure) and the tail of legacy/shell/run_daily.sh (CohortTagger, month-close turnover_snapshot). The coordinator's _SUCCESS done-flag wait on the three landing datasets is replaced by the upstream HR/KRONOS feed SLA (landing volume populated before 06:15 America/New_York); run_daily.sh 'publish' is replaced by output_sink=table (Unity Catalog tables under table_prefix are the published contract).",
+  "tags": {
+    "domain": "hr",
+    "team": "hr-data-eng",
+    "source_system": "emr-hr-prod",
+    "legacy_artifact": "oozie/workflow.xml,oozie/coordinator.xml,shell/run_daily.sh",
+    "migration_wave": "wave-1",
+    "cost_center": "CC-4429"
+  },
+  "parameters": [
+    {
+      "name": "run_date",
+      "default": "{{job.start_time.iso_date}}"
+    },
+    {
+      "name": "run_day_of_month",
+      "default": "{{job.start_time.day}}"
+    },
+    {
+      "name": "table_prefix",
+      "default": "hr_prod.hr"
+    }
+  ],
+  "git_source": {
+    "git_url": "https://github.com/milind-cognition/Demos",
+    "git_provider": "gitHub",
+    "git_branch": "main"
+  },
+  "job_clusters": [
+    {
+      "job_cluster_key": "hr_batch_small",
+      "new_cluster": {
+        "spark_version": "15.4.x-scala2.12",
+        "node_type_id": "m6gd.xlarge",
+        "driver_node_type_id": "m6gd.xlarge",
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 4
+        },
+        "data_security_mode": "SINGLE_USER",
+        "runtime_engine": "STANDARD",
+        "spark_conf": {
+          "spark.sql.session.timeZone": "UTC",
+          "spark.sql.ansi.enabled": "true",
+          "spark.sql.shuffle.partitions": "auto"
+        },
+        "aws_attributes": {
+          "availability": "SPOT_WITH_FALLBACK",
+          "first_on_demand": 1,
+          "zone_id": "auto",
+          "instance_profile_arn": "arn:aws:iam::000000000000:instance-profile/dbx-hr-batch"
+        },
+        "custom_tags": {
+          "CostCenter": "CC-4429",
+          "Workload": "hr_daily",
+          "DataClassification": "PII-CONFIDENTIAL"
+        },
+        "enable_elastic_disk": true
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "stage_and_publish",
+      "description": "Oozie action 'stage' (shell stage_and_publish.sh stage): header + dup-key audit -> stage_audit. Oozie retry-max=2 retry-interval=10.",
+      "job_cluster_key": "hr_batch_small",
+      "notebook_task": {
+        "notebook_path": "datacloud-migration-demo/target/notebooks/nb_stage_and_publish",
+        "source": "GIT",
+        "base_parameters": {
+          "run_date": "{{job.parameters.run_date}}",
+          "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
+          "output_sink": "table",
+          "table_prefix": "{{job.parameters.table_prefix}}",
+          "validate": "false"
+        }
+      },
+      "timeout_seconds": 3600,
+      "max_retries": 2,
+      "min_retry_interval_millis": 600000,
+      "retry_on_timeout": false,
+      "email_notifications": {
+        "on_failure": [
+          "hr-data-eng@acme-hcm.com"
+        ]
+      }
+    },
+    {
+      "task_key": "emp_metrics_daily",
+      "description": "Oozie action 'emp_metrics_daily' (hive2): SCD2 dim_employee + fct_emp_metrics_daily. Oozie retry-max=1 retry-interval=15.",
+      "depends_on": [
+        {
+          "task_key": "stage_and_publish"
+        }
+      ],
+      "job_cluster_key": "hr_batch_small",
+      "notebook_task": {
+        "notebook_path": "datacloud-migration-demo/target/notebooks/nb_emp_metrics_daily",
+        "source": "GIT",
+        "base_parameters": {
+          "run_date": "{{job.parameters.run_date}}",
+          "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
+          "output_sink": "table",
+          "table_prefix": "{{job.parameters.table_prefix}}",
+          "validate": "false"
+        }
+      },
+      "timeout_seconds": 3600,
+      "max_retries": 1,
+      "min_retry_interval_millis": 900000,
+      "retry_on_timeout": false,
+      "email_notifications": {
+        "on_failure": [
+          "hr-data-eng@acme-hcm.com"
+        ]
+      }
+    },
+    {
+      "task_key": "payroll_join",
+      "description": "Oozie action 'payroll_join' (pig): payroll_by_employee, payroll_by_cost_center. Oozie retry-max=1 retry-interval=15.",
+      "depends_on": [
+        {
+          "task_key": "emp_metrics_daily"
+        }
+      ],
+      "job_cluster_key": "hr_batch_small",
+      "notebook_task": {
+        "notebook_path": "datacloud-migration-demo/target/notebooks/nb_payroll_join",
+        "source": "GIT",
+        "base_parameters": {
+          "run_date": "{{job.parameters.run_date}}",
+          "period_start": "",
+          "period_end": "",
+          "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
+          "output_sink": "table",
+          "table_prefix": "{{job.parameters.table_prefix}}",
+          "validate": "false"
+        }
+      },
+      "timeout_seconds": 3600,
+      "max_retries": 1,
+      "min_retry_interval_millis": 900000,
+      "retry_on_timeout": false,
+      "email_notifications": {
+        "on_failure": [
+          "hr-data-eng@acme-hcm.com"
+        ]
+      }
+    },
+    {
+      "task_key": "cohort_tagger",
+      "description": "run_daily.sh step 3 (java CohortTagger, after Oozie SUCCEEDED): employee_cohorts. Legacy had no retry (|| exit 1).",
+      "depends_on": [
+        {
+          "task_key": "payroll_join"
+        }
+      ],
+      "job_cluster_key": "hr_batch_small",
+      "notebook_task": {
+        "notebook_path": "datacloud-migration-demo/target/notebooks/nb_cohort_tagger",
+        "source": "GIT",
+        "base_parameters": {
+          "run_date": "{{job.parameters.run_date}}",
+          "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
+          "output_sink": "table",
+          "table_prefix": "{{job.parameters.table_prefix}}",
+          "validate": "false"
+        }
+      },
+      "timeout_seconds": 3600,
+      "max_retries": 0,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "email_notifications": {
+        "on_failure": [
+          "hr-data-eng@acme-hcm.com"
+        ]
+      }
+    },
+    {
+      "task_key": "is_month_close",
+      "description": "run_daily.sh step 4 gate: `date -d $RUN_DATE +%d == 01 || FORCE_TURNOVER == 1`. Numeric <= 1 so '1' and '01' both match; force with run_day_of_month=1.",
+      "depends_on": [
+        {
+          "task_key": "cohort_tagger"
+        }
+      ],
+      "condition_task": {
+        "op": "LESS_THAN_OR_EQUAL",
+        "left": "{{job.parameters.run_day_of_month}}",
+        "right": "1"
+      }
+    },
+    {
+      "task_key": "turnover_snapshot",
+      "description": "run_daily.sh step 4 (hive turnover_snapshot.sql, month close only): turnover_snapshot. Legacy had no retry (|| exit 1).",
+      "depends_on": [
+        {
+          "task_key": "is_month_close",
+          "outcome": "true"
+        }
+      ],
+      "job_cluster_key": "hr_batch_small",
+      "notebook_task": {
+        "notebook_path": "datacloud-migration-demo/target/notebooks/nb_turnover_snapshot",
+        "source": "GIT",
+        "base_parameters": {
+          "run_date": "{{job.parameters.run_date}}",
+          "input_root": "/Volumes/hr_prod/landing/hr_feeds/{{job.parameters.run_date}}",
+          "output_sink": "table",
+          "table_prefix": "{{job.parameters.table_prefix}}",
+          "validate": "false"
+        }
+      },
+      "timeout_seconds": 3600,
+      "max_retries": 0,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": false,
+      "email_notifications": {
+        "on_failure": [
+          "hr-data-eng@acme-hcm.com"
+        ]
+      }
+    }
+  ],
+  "schedule": {
+    "quartz_cron_expression": "0 15 6 * * ?",
+    "timezone_id": "America/New_York",
+    "pause_status": "PAUSED"
+  },
+  "email_notifications": {
+    "on_failure": [
+      "hr-data-eng@acme-hcm.com"
+    ],
+    "on_duration_warning_threshold_exceeded": [
+      "hr-data-eng@acme-hcm.com"
+    ],
+    "no_alert_for_skipped_runs": true
+  },
+  "health": {
+    "rules": [
+      {
+        "metric": "RUN_DURATION_SECONDS",
+        "op": "GREATER_THAN",
+        "value": 7200
+      }
+    ]
+  },
+  "timeout_seconds": 28800,
+  "max_concurrent_runs": 1,
+  "queue": {
+    "enabled": true
+  },
+  "run_as": {
+    "service_principal_name": "3f2b6c1e-8a4d-4e7b-9c1a-5d6e7f8a9b0c"
+  },
+  "format": "MULTI_TASK"
+}
