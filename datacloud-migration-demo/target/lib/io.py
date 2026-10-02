@@ -78,3 +78,29 @@ def write_output(df, sink, out_dir, table_prefix, dataset, columns):
     if sink == "table":
         return write_table(df, "%s.%s" % (table_prefix, dataset), columns)
     raise ValueError("unknown output sink %r (expected csv|table)" % sink)
+
+
+def in_predicate(column, values):
+    """SQL ``<column> IN ('v1', 'v2', ...)`` for a ``replaceWhere`` scope (values are quoted literals)."""
+    if not values:
+        raise ValueError("in_predicate needs at least one value")
+    return "%s IN (%s)" % (column, ", ".join("'%s'" % str(v).replace("'", "''") for v in values))
+
+
+def write_table_replace_where(df, table_fqn, columns, replace_where):
+    """Cluster sink: overwrite only rows matching ``replace_where`` (Delta ``replaceWhere``); other rows kept.
+
+    Delta checks every written row matches the predicate. ``overwriteSchema`` is not allowed with a
+    partial overwrite, so the table schema must already match on existing tables.
+    """
+    df.select(*columns).write.mode("overwrite").option("replaceWhere", replace_where).saveAsTable(table_fqn)
+    return table_fqn
+
+
+def write_output_replace_where(df, sink, out_dir, table_prefix, dataset, columns, replace_where):
+    """Like ``write_output`` but the table sink replaces only ``replace_where`` rows; csv is a full file."""
+    if sink == "csv":
+        return write_csv(df, out_dir, dataset, columns)
+    if sink == "table":
+        return write_table_replace_where(df, "%s.%s" % (table_prefix, dataset), columns, replace_where)
+    raise ValueError("unknown output sink %r (expected csv|table)" % sink)
