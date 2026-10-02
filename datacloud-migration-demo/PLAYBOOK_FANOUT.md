@@ -9,7 +9,7 @@
 Launch the full migration wave for `milind-cognition/Demos` / `datacloud-migration-demo/`: five parallel child Devin sessions, each running the `!migrate_job` playbook on one legacy job (or the Oozie orchestration), then report back one table of PRs and validation results. The coordinating session does NOT migrate anything itself.
 
 ## What's Needed From User
-- Nothing beyond the trigger prompt. Optional: a subset of sessions (A–E) to launch, or an instruction to skip a job that has already been migrated.
+- Nothing beyond the trigger prompt. Optional: a subset of sessions (A through E) to launch, or an instruction to skip a job that has already been migrated.
 
 ## Procedure
 1. Clone/refresh `milind-cognition/Demos` and `cd datacloud-migration-demo`. Run `python3 scripts/validate.py --list` and note which jobs already have `nb_<job>.py` on `main`; drop those sessions from the wave (unless the user said otherwise).
