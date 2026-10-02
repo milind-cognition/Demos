@@ -14,8 +14,8 @@ cd dashboard && npm ci && npm run dev         # leave running → http://localho
 ```
 
 - Browser tabs: (1) http://localhost:5173/#/storyboards/workforce-overview, (2) the repo on GitHub,
-  (3) Jira ticket [MDD-98](https://cog-gtm.atlassian.net/browse/MDD-98), (4) a fresh Devin session with the
-  **DataCloud Analytics — Add a Metric** playbook attached (see `PLAYBOOK.md`).
+  (3) Jira ticket [MDD-98](https://cog-gtm.atlassian.net/browse/MDD-98), (4) a new Devin session on the `Demos`
+  repo, with the **DataCloud Analytics — Add a Metric** playbook selected (saved in Devin; source in `PLAYBOOK.md`).
 - Make sure `main` has no open MDD-98 PR or branch left over from a rehearsal (close/delete it), and MDD-98 is back in
   **To Do** with no leftover PR-link comments.
 - Devin needs Jira access to read MDD-98: the Atlassian MCP (or the Jira integration) must be authorized for the
@@ -45,42 +45,29 @@ cd dashboard && npm ci && npm run dev         # leave running → http://localho
 
 ## Act 2 — Kickoff (1 min)
 
-Paste this into the Devin session (playbook attached), exactly:
+Open a new Devin session on the `Demos` repo and type what an engineering manager would actually type:
 
 ```text
-Implement Jira ticket MDD-98 end to end per docs/ARCHITECTURE.md — engine function, registry entry, tests, regenerated metric JSON, dashboard card + storyboard page — and open a PR. Work in the datacloud-analytics-demo/ folder of the Demos repo. When the PR is up, comment its link on MDD-98.
+Can you pick up MDD-98? It's the overtime cost benchmark for the analytics dashboard. Flag anything in the ticket that's unclear, and open a PR when it's ready.
 ```
+
+That's the whole prompt. The rest comes from context Devin already has: the Jira ticket, the repo's `AGENTS.md` /
+`docs/ARCHITECTURE.md`, the saved **DataCloud Analytics — Add a Metric** playbook (attach it from the playbook picker,
+or type `!add_metric` in the prompt), and the `datacloud-analytics-tickets` skill.
+
+**Alternative kickoff from Jira:** on MDD-98, add a comment `@Devin can you pick this up?` (requires the Devin Jira
+integration to be connected for your account).
 
 **Offline fallback** (if the session can't reach Jira; the file is the same ticket):
 
 ```text
-Implement docs/requirements/INT-1042-overtime-benchmark.md end to end per docs/ARCHITECTURE.md — engine function, registry entry, tests, regenerated metric JSON, dashboard card + storyboard page — and open a PR.
+Can you pick up the ticket in datacloud-analytics-demo/docs/requirements/INT-1042-overtime-benchmark.md? Flag anything that's unclear, and open a PR when it's ready.
 ```
 
-**Guided version** (one prompt for the whole flow, with checkpoints Devin reports back on; good when you want Act 3
-to narrate itself):
-
-```text
-Work in the milind-cognition/Demos repo, inside datacloud-analytics-demo/. Implement Jira ticket MDD-98 end to end per docs/ARCHITECTURE.md — engine function, registry entry, tests, regenerated metric JSON, dashboard card + storyboard page — and open a PR.
-
-Work like a senior engineer on this team and narrate as you go. Post a short message to me at each checkpoint:
-
-1. Ticket review: read MDD-98 in Jira, AGENTS.md, docs/ARCHITECTURE.md, and the existing metrics before writing any code. Send me a numbered list of every requirement that's ambiguous or underspecified. For each one, say what assumption you'll make. Don't wait for my answers; continue with your assumptions.
-2. Plan: send a checklist that maps each acceptance criterion to the files you'll change.
-3. Engine + tests: create a branch off main named devin/mdd-98-overtime-benchmark. Implement the engine function and pytest tests, covering the company-wide rollup, empty or zero-employee cohorts, and the "high overtime" threshold boundary. Tell me when pytest is green.
-4. Registry + JSON: register the metric, run scripts/compute_metrics.py, and confirm the new JSON is valid and the existing metrics' JSON is unchanged.
-5. Dashboard: add the metric card and an "Overtime Cost Benchmark" storyboard that also features the existing Overtime Rate metric. Run npm test and npm run build until both pass.
-6. Browser check: run npm run dev, open the dashboard in your browser, and click through the new storyboard, the new metric page, and one existing page. Share screenshots.
-7. PR: open a PR to main titled "MDD-98: Add an overtime-cost benchmark metric by industry cohort". Include sections for Summary (the formula in one line), Changes, Verification (commands run plus screenshots), Open questions & assumptions, and Out of scope. Comment the PR link on MDD-98, then send me the link.
-
-After that, stay on the PR. When review comments come in, reply to each one, fix it in a new commit, re-run the checks, push, and reply on the thread with what changed. Never push to main.
-```
-
-> All paths are relative to `datacloud-analytics-demo/` in the `Demos` repo. If Devin asks where to work, answer:
-> `Work in the datacloud-analytics-demo/ folder of the Demos repo, branch off main.`
+> If Devin asks where to work, answer: `It's the datacloud-analytics-demo/ folder in the Demos repo, branch off main.`
 
 **Talking points**
-- "One sentence. No hand-holding — the ticket and the repo's own docs are the spec."
+- "That's the same message I'd send a teammate. The ticket and the repo's own docs are the spec."
 - "The playbook encodes how *this team* adds a metric, so every engineer — human or Devin — does it the same way."
 
 ---
