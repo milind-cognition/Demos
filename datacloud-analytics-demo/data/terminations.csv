@@ -1,0 +1,68 @@
+employee_id,termination_date,termination_type,reason
+E0217,2025-10-10,voluntary,Relocation
+E0208,2025-10-20,voluntary,Personal reasons
+E0040,2025-11-01,voluntary,Relocation
+E0090,2025-11-03,voluntary,Compensation
+E0064,2025-11-04,voluntary,Personal reasons
+E0158,2025-11-09,voluntary,Career opportunity
+E0168,2025-11-12,voluntary,Compensation
+E0131,2025-11-22,involuntary,Performance
+E0117,2025-12-03,involuntary,Performance
+E0231,2025-12-13,voluntary,Compensation
+E0080,2025-12-20,voluntary,Career opportunity
+E0183,2026-01-01,voluntary,Relocation
+E0195,2026-01-06,voluntary,Career opportunity
+E0235,2026-01-09,involuntary,End of seasonal assignment
+E0236,2026-01-09,involuntary,End of seasonal assignment
+E0237,2026-01-09,involuntary,End of seasonal assignment
+E0238,2026-01-09,involuntary,End of seasonal assignment
+E0239,2026-01-09,involuntary,End of seasonal assignment
+E0240,2026-01-09,involuntary,End of seasonal assignment
+E0241,2026-01-09,involuntary,End of seasonal assignment
+E0242,2026-01-09,involuntary,End of seasonal assignment
+E0243,2026-01-09,involuntary,End of seasonal assignment
+E0244,2026-01-09,involuntary,End of seasonal assignment
+E0245,2026-01-09,involuntary,End of seasonal assignment
+E0246,2026-01-09,involuntary,End of seasonal assignment
+E0247,2026-01-09,involuntary,End of seasonal assignment
+E0248,2026-01-09,involuntary,End of seasonal assignment
+E0201,2026-01-11,involuntary,Performance
+E0174,2026-01-25,voluntary,Personal reasons
+E0229,2026-02-01,involuntary,Position eliminated
+E0103,2026-02-06,voluntary,Personal reasons
+E0121,2026-02-06,voluntary,Personal reasons
+E0133,2026-02-11,voluntary,Career opportunity
+E0130,2026-02-26,voluntary,Compensation
+E0258,2026-03-01,involuntary,Attendance
+E0185,2026-03-04,voluntary,Personal reasons
+E0220,2026-03-06,voluntary,Compensation
+E0089,2026-03-14,voluntary,Compensation
+E0094,2026-03-23,involuntary,Attendance
+E0127,2026-03-27,voluntary,Return to school
+E0213,2026-04-04,voluntary,Return to school
+E0110,2026-04-16,voluntary,Career opportunity
+E0271,2026-04-18,involuntary,Position eliminated
+E0102,2026-05-11,involuntary,Position eliminated
+E0062,2026-05-13,voluntary,Return to school
+E0184,2026-05-16,involuntary,Position eliminated
+E0283,2026-05-17,voluntary,Career opportunity
+E0254,2026-05-22,voluntary,Personal reasons
+E0166,2026-05-25,voluntary,Career opportunity
+E0005,2026-06-07,voluntary,Compensation
+E0269,2026-06-12,voluntary,Personal reasons
+E0264,2026-06-14,involuntary,Attendance
+E0033,2026-07-06,voluntary,Return to school
+E0001,2026-07-17,voluntary,Personal reasons
+E0190,2026-07-19,voluntary,Return to school
+E0073,2026-07-22,voluntary,Relocation
+E0050,2026-07-25,involuntary,Performance
+E0012,2026-07-28,voluntary,Personal reasons
+E0218,2026-08-07,voluntary,Compensation
+E0070,2026-08-12,voluntary,Return to school
+E0165,2026-08-19,voluntary,Career opportunity
+E0301,2026-08-21,voluntary,Compensation
+E0206,2026-08-26,voluntary,Return to school
+E0109,2026-09-10,voluntary,Personal reasons
+E0210,2026-09-14,voluntary,Career opportunity
+E0273,2026-09-26,voluntary,Return to school
+E0186,2026-09-27,voluntary,Personal reasons

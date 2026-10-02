@@ -1,0 +1,498 @@
+{
+  "schema_version": 1,
+  "key": "headcount",
+  "label": "Headcount",
+  "description": "Active employees on the last day of the period.",
+  "unit": "count",
+  "higher_is_better": true,
+  "periods": [
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09"
+  ],
+  "total": [
+    {
+      "period": "2025-10",
+      "value": 239
+    },
+    {
+      "period": "2025-11",
+      "value": 249
+    },
+    {
+      "period": "2025-12",
+      "value": 249
+    },
+    {
+      "period": "2026-01",
+      "value": 240
+    },
+    {
+      "period": "2026-02",
+      "value": 241
+    },
+    {
+      "period": "2026-03",
+      "value": 239
+    },
+    {
+      "period": "2026-04",
+      "value": 242
+    },
+    {
+      "period": "2026-05",
+      "value": 241
+    },
+    {
+      "period": "2026-06",
+      "value": 245
+    },
+    {
+      "period": "2026-07",
+      "value": 246
+    },
+    {
+      "period": "2026-08",
+      "value": 246
+    },
+    {
+      "period": "2026-09",
+      "value": 250
+    }
+  ],
+  "by_department": [
+    {
+      "department": "Customer Success",
+      "series": [
+        {
+          "period": "2025-10",
+          "value": 28
+        },
+        {
+          "period": "2025-11",
+          "value": 28
+        },
+        {
+          "period": "2025-12",
+          "value": 27
+        },
+        {
+          "period": "2026-01",
+          "value": 30
+        },
+        {
+          "period": "2026-02",
+          "value": 27
+        },
+        {
+          "period": "2026-03",
+          "value": 28
+        },
+        {
+          "period": "2026-04",
+          "value": 27
+        },
+        {
+          "period": "2026-05",
+          "value": 28
+        },
+        {
+          "period": "2026-06",
+          "value": 29
+        },
+        {
+          "period": "2026-07",
+          "value": 29
+        },
+        {
+          "period": "2026-08",
+          "value": 29
+        },
+        {
+          "period": "2026-09",
+          "value": 28
+        }
+      ]
+    },
+    {
+      "department": "Finance",
+      "series": [
+        {
+          "period": "2025-10",
+          "value": 16
+        },
+        {
+          "period": "2025-11",
+          "value": 16
+        },
+        {
+          "period": "2025-12",
+          "value": 16
+        },
+        {
+          "period": "2026-01",
+          "value": 16
+        },
+        {
+          "period": "2026-02",
+          "value": 16
+        },
+        {
+          "period": "2026-03",
+          "value": 16
+        },
+        {
+          "period": "2026-04",
+          "value": 17
+        },
+        {
+          "period": "2026-05",
+          "value": 17
+        },
+        {
+          "period": "2026-06",
+          "value": 17
+        },
+        {
+          "period": "2026-07",
+          "value": 17
+        },
+        {
+          "period": "2026-08",
+          "value": 17
+        },
+        {
+          "period": "2026-09",
+          "value": 18
+        }
+      ]
+    },
+    {
+      "department": "Fleet Services",
+      "series": [
+        {
+          "period": "2025-10",
+          "value": 21
+        },
+        {
+          "period": "2025-11",
+          "value": 22
+        },
+        {
+          "period": "2025-12",
+          "value": 21
+        },
+        {
+          "period": "2026-01",
+          "value": 23
+        },
+        {
+          "period": "2026-02",
+          "value": 22
+        },
+        {
+          "period": "2026-03",
+          "value": 22
+        },
+        {
+          "period": "2026-04",
+          "value": 22
+        },
+        {
+          "period": "2026-05",
+          "value": 23
+        },
+        {
+          "period": "2026-06",
+          "value": 22
+        },
+        {
+          "period": "2026-07",
+          "value": 23
+        },
+        {
+          "period": "2026-08",
+          "value": 21
+        },
+        {
+          "period": "2026-09",
+          "value": 22
+        }
+      ]
+    },
+    {
+      "department": "Payroll Operations",
+      "series": [
+        {
+          "period": "2025-10",
+          "value": 14
+        },
+        {
+          "period": "2025-11",
+          "value": 14
+        },
+        {
+          "period": "2025-12",
+          "value": 14
+        },
+        {
+          "period": "2026-01",
+          "value": 15
+        },
+        {
+          "period": "2026-02",
+          "value": 15
+        },
+        {
+          "period": "2026-03",
+          "value": 15
+        },
+        {
+          "period": "2026-04",
+          "value": 15
+        },
+        {
+          "period": "2026-05",
+          "value": 15
+        },
+        {
+          "period": "2026-06",
+          "value": 15
+        },
+        {
+          "period": "2026-07",
+          "value": 16
+        },
+        {
+          "period": "2026-08",
+          "value": 16
+        },
+        {
+          "period": "2026-09",
+          "value": 16
+        }
+      ]
+    },
+    {
+      "department": "Platform Engineering",
+      "series": [
+        {
+          "period": "2025-10",
+          "value": 34
+        },
+        {
+          "period": "2025-11",
+          "value": 35
+        },
+        {
+          "period": "2025-12",
+          "value": 35
+        },
+        {
+          "period": "2026-01",
+          "value": 35
+        },
+        {
+          "period": "2026-02",
+          "value": 35
+        },
+        {
+          "period": "2026-03",
+          "value": 35
+        },
+        {
+          "period": "2026-04",
+          "value": 35
+        },
+        {
+          "period": "2026-05",
+          "value": 36
+        },
+        {
+          "period": "2026-06",
+          "value": 36
+        },
+        {
+          "period": "2026-07",
+          "value": 33
+        },
+        {
+          "period": "2026-08",
+          "value": 35
+        },
+        {
+          "period": "2026-09",
+          "value": 36
+        }
+      ]
+    },
+    {
+      "department": "Product Engineering",
+      "series": [
+        {
+          "period": "2025-10",
+          "value": 42
+        },
+        {
+          "period": "2025-11",
+          "value": 41
+        },
+        {
+          "period": "2025-12",
+          "value": 44
+        },
+        {
+          "period": "2026-01",
+          "value": 45
+        },
+        {
+          "period": "2026-02",
+          "value": 46
+        },
+        {
+          "period": "2026-03",
+          "value": 46
+        },
+        {
+          "period": "2026-04",
+          "value": 47
+        },
+        {
+          "period": "2026-05",
+          "value": 45
+        },
+        {
+          "period": "2026-06",
+          "value": 47
+        },
+        {
+          "period": "2026-07",
+          "value": 47
+        },
+        {
+          "period": "2026-08",
+          "value": 48
+        },
+        {
+          "period": "2026-09",
+          "value": 50
+        }
+      ]
+    },
+    {
+      "department": "Sales",
+      "series": [
+        {
+          "period": "2025-10",
+          "value": 31
+        },
+        {
+          "period": "2025-11",
+          "value": 31
+        },
+        {
+          "period": "2025-12",
+          "value": 30
+        },
+        {
+          "period": "2026-01",
+          "value": 32
+        },
+        {
+          "period": "2026-02",
+          "value": 32
+        },
+        {
+          "period": "2026-03",
+          "value": 30
+        },
+        {
+          "period": "2026-04",
+          "value": 32
+        },
+        {
+          "period": "2026-05",
+          "value": 32
+        },
+        {
+          "period": "2026-06",
+          "value": 33
+        },
+        {
+          "period": "2026-07",
+          "value": 35
+        },
+        {
+          "period": "2026-08",
+          "value": 36
+        },
+        {
+          "period": "2026-09",
+          "value": 36
+        }
+      ]
+    },
+    {
+      "department": "Warehouse Operations",
+      "series": [
+        {
+          "period": "2025-10",
+          "value": 53
+        },
+        {
+          "period": "2025-11",
+          "value": 62
+        },
+        {
+          "period": "2025-12",
+          "value": 62
+        },
+        {
+          "period": "2026-01",
+          "value": 44
+        },
+        {
+          "period": "2026-02",
+          "value": 48
+        },
+        {
+          "period": "2026-03",
+          "value": 47
+        },
+        {
+          "period": "2026-04",
+          "value": 47
+        },
+        {
+          "period": "2026-05",
+          "value": 45
+        },
+        {
+          "period": "2026-06",
+          "value": 46
+        },
+        {
+          "period": "2026-07",
+          "value": 46
+        },
+        {
+          "period": "2026-08",
+          "value": 44
+        },
+        {
+          "period": "2026-09",
+          "value": 44
+        }
+      ]
+    }
+  ]
+}

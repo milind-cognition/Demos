@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "metrics": [
+    {
+      "key": "headcount",
+      "label": "Headcount",
+      "unit": "count",
+      "file": "headcount.json"
+    },
+    {
+      "key": "turnover",
+      "label": "Turnover Rate",
+      "unit": "percent",
+      "file": "turnover.json"
+    },
+    {
+      "key": "overtime",
+      "label": "Overtime Rate",
+      "unit": "percent",
+      "file": "overtime.json"
+    }
+  ]
+}

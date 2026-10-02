@@ -1,0 +1,7 @@
+employee_id,department_id,job_title,flsa_status,employment_type,hourly_rate,hire_date
+E1,D10,Assembler,non_exempt,full_time,25.00,2025-06-01
+E2,D10,Assembler,non_exempt,full_time,22.00,2025-08-15
+E3,D10,Assembler,non_exempt,full_time,24.00,2026-02-10
+E4,D20,Data Scientist,exempt,full_time,60.00,2024-01-01
+E5,D20,Analyst,exempt,full_time,55.00,2025-03-01
+E6,D20,Data Technician,non_exempt,part_time,30.00,2025-11-01

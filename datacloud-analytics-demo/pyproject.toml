@@ -1,0 +1,10 @@
+[project]
+name = "datacloud-metrics"
+version = "0.1.0"
+description = "Workforce metrics engine for the DataCloud Analytics demo"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["metrics/tests"]
+pythonpath = ["."]
+addopts = "-q"

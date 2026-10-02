@@ -1,0 +1,318 @@
+employee_id,department_id,job_title,flsa_status,employment_type,hourly_rate,hire_date
+E0001,D01,Platform Engineer,non_exempt,full_time,53.19,2019-10-27
+E0002,D01,Site Reliability Engineer,exempt,full_time,62.57,2022-07-06
+E0003,D01,Site Reliability Engineer,exempt,full_time,63.47,2022-06-02
+E0004,D01,Site Reliability Engineer,exempt,full_time,69.49,2025-04-18
+E0005,D01,Infrastructure Technician,exempt,full_time,79.49,2017-10-02
+E0006,D01,Site Reliability Engineer,exempt,full_time,70.61,2023-07-14
+E0007,D01,Platform Engineer,exempt,full_time,57.12,2019-04-21
+E0008,D01,Site Reliability Engineer,exempt,full_time,71.13,2023-12-21
+E0009,D01,Site Reliability Engineer,exempt,full_time,67.00,2020-10-16
+E0010,D01,Platform Engineer,non_exempt,full_time,66.95,2025-06-28
+E0011,D01,Site Reliability Engineer,non_exempt,full_time,69.55,2019-04-09
+E0012,D01,Site Reliability Engineer,non_exempt,full_time,68.30,2019-03-28
+E0013,D01,Site Reliability Engineer,exempt,full_time,85.16,2020-07-16
+E0014,D01,Site Reliability Engineer,exempt,full_time,60.07,2025-07-17
+E0015,D01,Site Reliability Engineer,non_exempt,full_time,72.02,2018-11-01
+E0016,D01,Infrastructure Technician,exempt,full_time,68.50,2018-03-18
+E0017,D01,Infrastructure Technician,exempt,full_time,81.61,2019-12-06
+E0018,D01,Platform Engineer,exempt,full_time,66.24,2024-05-30
+E0019,D01,Site Reliability Engineer,exempt,full_time,74.66,2022-04-20
+E0020,D01,Platform Engineer,exempt,full_time,82.26,2018-10-28
+E0021,D01,Site Reliability Engineer,exempt,full_time,59.21,2021-07-18
+E0022,D01,Infrastructure Technician,exempt,full_time,64.03,2022-07-08
+E0023,D01,Platform Engineer,exempt,full_time,64.82,2019-10-29
+E0024,D01,Site Reliability Engineer,exempt,full_time,86.24,2022-11-19
+E0025,D01,Site Reliability Engineer,exempt,full_time,67.14,2021-12-05
+E0026,D01,Infrastructure Technician,exempt,full_time,59.95,2023-06-15
+E0027,D01,Platform Engineer,exempt,full_time,64.24,2017-11-26
+E0028,D01,Platform Engineer,exempt,full_time,63.84,2021-04-21
+E0029,D01,Infrastructure Technician,non_exempt,full_time,59.93,2020-01-30
+E0030,D01,Site Reliability Engineer,exempt,full_time,70.64,2024-12-03
+E0031,D01,Infrastructure Technician,exempt,full_time,76.21,2017-09-25
+E0032,D01,Platform Engineer,exempt,full_time,76.41,2020-04-17
+E0033,D01,Platform Engineer,exempt,full_time,80.96,2024-04-19
+E0034,D01,Platform Engineer,exempt,full_time,83.83,2020-07-31
+E0035,D02,Engineering Manager,exempt,full_time,64.61,2021-03-22
+E0036,D02,Software Engineer,exempt,full_time,56.14,2020-01-24
+E0037,D02,Software Engineer,exempt,full_time,62.96,2020-08-31
+E0038,D02,Engineering Manager,exempt,full_time,84.10,2024-07-10
+E0039,D02,Engineering Manager,exempt,full_time,57.60,2022-07-19
+E0040,D02,Engineering Manager,exempt,full_time,84.23,2020-09-10
+E0041,D02,Software Engineer,exempt,full_time,62.60,2022-05-04
+E0042,D02,QA Analyst,exempt,full_time,60.48,2018-12-09
+E0043,D02,Software Engineer,exempt,full_time,61.84,2017-03-13
+E0044,D02,Software Engineer,exempt,full_time,50.71,2020-12-26
+E0045,D02,Software Engineer,exempt,full_time,68.49,2024-09-20
+E0046,D02,Software Engineer,exempt,full_time,51.06,2018-03-19
+E0047,D02,Software Engineer,exempt,full_time,66.17,2019-06-07
+E0048,D02,QA Analyst,exempt,full_time,84.66,2018-10-21
+E0049,D02,Engineering Manager,exempt,full_time,51.57,2023-04-03
+E0050,D02,Engineering Manager,non_exempt,full_time,58.44,2017-02-26
+E0051,D02,Software Engineer,exempt,full_time,84.44,2024-07-06
+E0052,D02,Software Engineer,exempt,full_time,63.22,2021-01-16
+E0053,D02,Engineering Manager,exempt,full_time,85.00,2023-04-06
+E0054,D02,Engineering Manager,exempt,full_time,69.04,2020-11-30
+E0055,D02,Software Engineer,exempt,full_time,66.49,2025-06-18
+E0056,D02,Software Engineer,exempt,full_time,49.21,2022-03-12
+E0057,D02,Software Engineer,non_exempt,full_time,55.54,2023-11-18
+E0058,D02,Software Engineer,non_exempt,full_time,58.33,2025-07-07
+E0059,D02,Software Engineer,exempt,full_time,66.09,2019-06-05
+E0060,D02,QA Analyst,exempt,full_time,51.66,2018-01-05
+E0061,D02,Engineering Manager,non_exempt,full_time,61.67,2018-06-28
+E0062,D02,Engineering Manager,exempt,full_time,58.33,2020-06-28
+E0063,D02,Software Engineer,exempt,full_time,49.28,2024-05-26
+E0064,D02,Engineering Manager,exempt,full_time,72.05,2019-06-13
+E0065,D02,Engineering Manager,exempt,full_time,73.50,2024-09-12
+E0066,D02,QA Analyst,exempt,full_time,61.27,2022-10-20
+E0067,D02,QA Analyst,exempt,full_time,67.64,2017-07-25
+E0068,D02,Engineering Manager,exempt,full_time,69.09,2017-08-26
+E0069,D02,Software Engineer,exempt,full_time,69.22,2023-07-31
+E0070,D02,Software Engineer,exempt,full_time,82.23,2024-11-25
+E0071,D02,Software Engineer,exempt,full_time,53.18,2017-11-03
+E0072,D02,Software Engineer,exempt,full_time,81.01,2021-12-06
+E0073,D02,Software Engineer,exempt,full_time,59.33,2021-06-13
+E0074,D02,Engineering Manager,exempt,full_time,65.93,2020-06-19
+E0075,D02,QA Analyst,exempt,full_time,66.62,2022-02-17
+E0076,D02,QA Analyst,exempt,full_time,53.90,2020-06-22
+E0077,D03,Sales Development Rep,exempt,full_time,40.88,2020-01-30
+E0078,D03,Sales Development Rep,exempt,full_time,49.11,2018-12-27
+E0079,D03,Sales Operations Analyst,non_exempt,full_time,36.32,2020-03-15
+E0080,D03,Sales Operations Analyst,exempt,full_time,48.42,2020-08-01
+E0081,D03,Sales Operations Analyst,exempt,full_time,51.78,2019-11-06
+E0082,D03,Account Executive,exempt,full_time,55.36,2023-07-22
+E0083,D03,Account Executive,exempt,full_time,51.15,2018-05-30
+E0084,D03,Sales Development Rep,exempt,full_time,58.48,2021-11-24
+E0085,D03,Sales Development Rep,non_exempt,full_time,48.04,2019-12-26
+E0086,D03,Sales Development Rep,non_exempt,full_time,47.92,2021-04-23
+E0087,D03,Sales Operations Analyst,non_exempt,full_time,54.28,2023-12-22
+E0088,D03,Sales Operations Analyst,non_exempt,full_time,46.55,2022-04-08
+E0089,D03,Sales Operations Analyst,non_exempt,full_time,44.65,2024-08-08
+E0090,D03,Sales Operations Analyst,exempt,full_time,42.97,2018-08-11
+E0091,D03,Account Executive,exempt,full_time,53.67,2022-12-30
+E0092,D03,Sales Development Rep,exempt,full_time,50.16,2019-07-17
+E0093,D03,Sales Operations Analyst,exempt,full_time,43.74,2018-07-20
+E0094,D03,Sales Operations Analyst,exempt,full_time,40.74,2022-02-07
+E0095,D03,Sales Operations Analyst,exempt,full_time,67.92,2024-05-15
+E0096,D03,Sales Development Rep,exempt,full_time,45.03,2018-02-28
+E0097,D03,Sales Operations Analyst,exempt,full_time,43.69,2018-11-07
+E0098,D03,Account Executive,exempt,full_time,38.64,2020-09-11
+E0099,D03,Sales Development Rep,exempt,full_time,39.69,2021-10-24
+E0100,D03,Sales Development Rep,exempt,full_time,61.41,2023-05-01
+E0101,D03,Account Executive,non_exempt,full_time,42.55,2021-01-24
+E0102,D03,Sales Operations Analyst,exempt,full_time,48.66,2020-09-09
+E0103,D03,Sales Development Rep,exempt,full_time,51.73,2019-03-30
+E0104,D03,Account Executive,exempt,full_time,50.28,2018-01-05
+E0105,D03,Sales Development Rep,exempt,full_time,50.52,2018-05-16
+E0106,D03,Account Executive,non_exempt,full_time,32.36,2018-12-06
+E0107,D04,Implementation Consultant,non_exempt,full_time,27.70,2025-09-05
+E0108,D04,Support Specialist,non_exempt,full_time,33.50,2017-09-29
+E0109,D04,Customer Success Manager,non_exempt,full_time,28.59,2022-12-05
+E0110,D04,Implementation Consultant,exempt,full_time,26.82,2021-11-12
+E0111,D04,Customer Success Manager,non_exempt,full_time,27.73,2019-08-16
+E0112,D04,Customer Success Manager,non_exempt,full_time,24.81,2024-01-14
+E0113,D04,Support Specialist,non_exempt,full_time,29.29,2022-06-13
+E0114,D04,Customer Success Manager,non_exempt,full_time,33.40,2017-02-05
+E0115,D04,Customer Success Manager,non_exempt,part_time,33.48,2021-01-11
+E0116,D04,Customer Success Manager,non_exempt,part_time,33.04,2018-09-27
+E0117,D04,Implementation Consultant,non_exempt,full_time,24.74,2024-01-08
+E0118,D04,Support Specialist,non_exempt,part_time,28.29,2024-02-05
+E0119,D04,Implementation Consultant,non_exempt,full_time,27.78,2023-06-30
+E0120,D04,Implementation Consultant,non_exempt,full_time,33.47,2019-09-08
+E0121,D04,Support Specialist,non_exempt,full_time,25.95,2018-05-01
+E0122,D04,Implementation Consultant,non_exempt,full_time,25.53,2022-07-14
+E0123,D04,Implementation Consultant,non_exempt,full_time,33.47,2017-07-12
+E0124,D04,Implementation Consultant,non_exempt,full_time,24.04,2021-12-13
+E0125,D04,Support Specialist,non_exempt,full_time,30.44,2018-02-22
+E0126,D04,Support Specialist,non_exempt,full_time,26.01,2020-09-04
+E0127,D04,Support Specialist,non_exempt,full_time,29.24,2022-04-08
+E0128,D04,Support Specialist,non_exempt,full_time,31.99,2023-09-15
+E0129,D04,Implementation Consultant,non_exempt,full_time,27.16,2019-06-22
+E0130,D04,Implementation Consultant,non_exempt,full_time,26.81,2019-07-22
+E0131,D04,Customer Success Manager,non_exempt,full_time,26.35,2018-07-03
+E0132,D04,Implementation Consultant,non_exempt,full_time,32.33,2017-07-16
+E0133,D04,Implementation Consultant,non_exempt,full_time,26.55,2023-02-12
+E0134,D04,Implementation Consultant,non_exempt,full_time,26.78,2024-12-05
+E0135,D05,Accountant,non_exempt,full_time,36.77,2025-04-15
+E0136,D05,Controller,exempt,full_time,53.34,2023-09-26
+E0137,D05,Controller,exempt,full_time,56.58,2020-12-30
+E0138,D05,Financial Analyst,exempt,full_time,51.34,2018-12-26
+E0139,D05,Financial Analyst,exempt,full_time,57.24,2021-09-21
+E0140,D05,Financial Analyst,exempt,full_time,44.66,2025-09-09
+E0141,D05,Controller,non_exempt,full_time,36.34,2022-02-05
+E0142,D05,Accountant,non_exempt,full_time,37.98,2017-10-12
+E0143,D05,Financial Analyst,non_exempt,full_time,47.87,2020-08-19
+E0144,D05,Financial Analyst,exempt,full_time,63.91,2020-12-19
+E0145,D05,Controller,exempt,full_time,48.99,2025-09-11
+E0146,D05,Controller,exempt,full_time,44.53,2024-01-25
+E0147,D05,Financial Analyst,non_exempt,full_time,37.72,2019-10-27
+E0148,D05,Accountant,exempt,full_time,52.40,2024-06-30
+E0149,D05,Controller,exempt,full_time,34.91,2023-02-08
+E0150,D05,Accountant,non_exempt,part_time,43.68,2020-02-24
+E0151,D06,Payroll Supervisor,non_exempt,full_time,30.87,2025-02-01
+E0152,D06,Payroll Specialist,non_exempt,full_time,33.20,2025-05-14
+E0153,D06,Payroll Specialist,exempt,full_time,34.98,2024-09-09
+E0154,D06,Payroll Supervisor,non_exempt,full_time,33.52,2018-07-29
+E0155,D06,Payroll Specialist,exempt,full_time,38.68,2022-04-10
+E0156,D06,Payroll Tax Analyst,non_exempt,full_time,31.97,2023-10-25
+E0157,D06,Payroll Specialist,exempt,full_time,35.12,2022-12-01
+E0158,D06,Payroll Supervisor,non_exempt,full_time,31.97,2019-04-10
+E0159,D06,Payroll Supervisor,non_exempt,full_time,26.04,2022-10-05
+E0160,D06,Payroll Specialist,non_exempt,full_time,29.02,2019-01-28
+E0161,D06,Payroll Specialist,non_exempt,full_time,34.66,2020-08-22
+E0162,D06,Payroll Tax Analyst,non_exempt,full_time,35.14,2020-01-31
+E0163,D06,Payroll Specialist,non_exempt,full_time,34.60,2019-10-01
+E0164,D06,Payroll Supervisor,non_exempt,full_time,35.17,2019-11-27
+E0165,D07,Shift Lead,non_exempt,full_time,19.51,2022-12-23
+E0166,D07,Forklift Operator,exempt,full_time,20.05,2023-06-03
+E0167,D07,Warehouse Associate,non_exempt,full_time,21.68,2017-11-03
+E0168,D07,Shift Lead,exempt,full_time,21.43,2025-03-15
+E0169,D07,Forklift Operator,non_exempt,full_time,23.65,2020-01-24
+E0170,D07,Forklift Operator,non_exempt,full_time,20.03,2018-03-02
+E0171,D07,Forklift Operator,non_exempt,full_time,19.09,2023-01-18
+E0172,D07,Warehouse Associate,non_exempt,full_time,20.53,2024-05-09
+E0173,D07,Forklift Operator,non_exempt,full_time,20.33,2021-09-07
+E0174,D07,Forklift Operator,non_exempt,full_time,23.04,2021-12-27
+E0175,D07,Shift Lead,non_exempt,full_time,22.74,2019-06-04
+E0176,D07,Shift Lead,non_exempt,full_time,19.55,2023-02-23
+E0177,D07,Forklift Operator,non_exempt,part_time,21.36,2020-09-04
+E0178,D07,Warehouse Associate,exempt,full_time,27.01,2017-08-14
+E0179,D07,Shift Lead,non_exempt,full_time,19.23,2017-10-19
+E0180,D07,Forklift Operator,non_exempt,full_time,24.56,2024-01-01
+E0181,D07,Shift Lead,non_exempt,full_time,23.23,2024-02-11
+E0182,D07,Shift Lead,non_exempt,part_time,21.49,2017-04-10
+E0183,D07,Shift Lead,non_exempt,full_time,20.64,2017-08-31
+E0184,D07,Forklift Operator,non_exempt,full_time,19.34,2021-12-19
+E0185,D07,Warehouse Associate,non_exempt,full_time,21.38,2020-11-07
+E0186,D07,Shift Lead,non_exempt,part_time,25.51,2019-07-05
+E0187,D07,Forklift Operator,non_exempt,full_time,21.90,2021-01-06
+E0188,D07,Warehouse Associate,non_exempt,full_time,19.68,2022-07-05
+E0189,D07,Warehouse Associate,non_exempt,full_time,24.99,2018-04-14
+E0190,D07,Forklift Operator,non_exempt,full_time,19.19,2024-12-21
+E0191,D07,Shift Lead,non_exempt,full_time,24.29,2020-03-04
+E0192,D07,Forklift Operator,non_exempt,full_time,22.96,2022-07-26
+E0193,D07,Forklift Operator,non_exempt,full_time,21.58,2018-04-24
+E0194,D07,Forklift Operator,non_exempt,full_time,20.82,2020-03-24
+E0195,D07,Shift Lead,non_exempt,full_time,22.85,2018-09-30
+E0196,D07,Shift Lead,non_exempt,full_time,24.15,2023-07-14
+E0197,D07,Shift Lead,non_exempt,full_time,20.70,2017-08-13
+E0198,D07,Warehouse Associate,non_exempt,full_time,19.76,2019-06-24
+E0199,D07,Warehouse Associate,non_exempt,full_time,21.22,2022-03-01
+E0200,D07,Shift Lead,exempt,full_time,28.14,2024-04-07
+E0201,D07,Warehouse Associate,non_exempt,full_time,20.93,2022-07-08
+E0202,D07,Forklift Operator,non_exempt,full_time,20.60,2017-08-27
+E0203,D07,Forklift Operator,non_exempt,full_time,21.21,2020-12-18
+E0204,D07,Warehouse Associate,non_exempt,part_time,19.80,2021-09-17
+E0205,D07,Forklift Operator,non_exempt,full_time,21.40,2023-10-24
+E0206,D07,Warehouse Associate,non_exempt,full_time,23.16,2024-01-15
+E0207,D07,Forklift Operator,non_exempt,full_time,24.33,2023-05-13
+E0208,D07,Warehouse Associate,exempt,full_time,24.96,2021-05-21
+E0209,D07,Shift Lead,non_exempt,full_time,21.28,2019-02-20
+E0210,D07,Shift Lead,non_exempt,full_time,19.16,2020-04-17
+E0211,D07,Forklift Operator,non_exempt,full_time,20.49,2021-11-17
+E0212,D07,Forklift Operator,non_exempt,full_time,20.04,2024-07-15
+E0213,D08,Fleet Mechanic,non_exempt,full_time,24.26,2019-07-31
+E0214,D08,Delivery Driver,non_exempt,full_time,22.13,2023-08-01
+E0215,D08,Dispatcher,non_exempt,full_time,24.89,2025-01-04
+E0216,D08,Delivery Driver,non_exempt,full_time,24.17,2025-08-16
+E0217,D08,Delivery Driver,non_exempt,full_time,29.02,2019-08-18
+E0218,D08,Dispatcher,non_exempt,full_time,23.51,2023-12-29
+E0219,D08,Fleet Mechanic,non_exempt,part_time,27.79,2018-01-18
+E0220,D08,Delivery Driver,non_exempt,part_time,25.48,2021-05-14
+E0221,D08,Dispatcher,non_exempt,full_time,28.61,2017-07-15
+E0222,D08,Dispatcher,non_exempt,full_time,27.09,2023-06-28
+E0223,D08,Delivery Driver,non_exempt,full_time,22.27,2022-07-11
+E0224,D08,Fleet Mechanic,non_exempt,full_time,23.26,2017-05-07
+E0225,D08,Delivery Driver,non_exempt,full_time,25.70,2020-12-02
+E0226,D08,Delivery Driver,non_exempt,part_time,28.56,2020-09-09
+E0227,D08,Delivery Driver,non_exempt,part_time,25.96,2020-05-10
+E0228,D08,Fleet Mechanic,non_exempt,full_time,22.21,2025-01-30
+E0229,D08,Fleet Mechanic,non_exempt,full_time,23.62,2019-10-14
+E0230,D08,Delivery Driver,non_exempt,full_time,24.08,2022-06-10
+E0231,D08,Fleet Mechanic,non_exempt,full_time,23.16,2018-08-30
+E0232,D08,Dispatcher,non_exempt,full_time,26.68,2021-11-10
+E0233,D08,Fleet Mechanic,non_exempt,full_time,27.79,2020-07-06
+E0234,D08,Fleet Mechanic,non_exempt,full_time,24.00,2024-10-13
+E0235,D07,Seasonal Warehouse Associate,non_exempt,full_time,19.73,2025-10-13
+E0236,D07,Seasonal Warehouse Associate,non_exempt,part_time,23.82,2025-10-13
+E0237,D07,Seasonal Warehouse Associate,non_exempt,full_time,19.13,2025-10-13
+E0238,D07,Seasonal Warehouse Associate,non_exempt,full_time,20.33,2025-10-13
+E0239,D07,Seasonal Warehouse Associate,non_exempt,full_time,21.38,2025-10-13
+E0240,D07,Seasonal Warehouse Associate,non_exempt,full_time,22.63,2025-10-13
+E0241,D07,Seasonal Warehouse Associate,non_exempt,full_time,22.24,2025-11-03
+E0242,D07,Seasonal Warehouse Associate,non_exempt,full_time,21.69,2025-11-03
+E0243,D07,Seasonal Warehouse Associate,non_exempt,full_time,23.35,2025-11-03
+E0244,D07,Seasonal Warehouse Associate,non_exempt,full_time,21.29,2025-11-03
+E0245,D07,Seasonal Warehouse Associate,non_exempt,full_time,22.79,2025-11-03
+E0246,D07,Seasonal Warehouse Associate,non_exempt,full_time,19.61,2025-11-03
+E0247,D07,Seasonal Warehouse Associate,non_exempt,full_time,24.84,2025-11-03
+E0248,D07,Seasonal Warehouse Associate,non_exempt,part_time,20.07,2025-11-03
+E0249,D03,Account Executive,exempt,full_time,64.28,2025-10-21
+E0250,D07,Forklift Operator,non_exempt,full_time,25.48,2025-11-18
+E0251,D08,Fleet Mechanic,non_exempt,full_time,25.88,2025-11-19
+E0252,D01,Platform Engineer,exempt,full_time,69.30,2025-11-13
+E0253,D02,Software Engineer,exempt,full_time,50.15,2025-11-17
+E0254,D03,Account Executive,exempt,full_time,50.80,2025-11-29
+E0255,D04,Support Specialist,non_exempt,full_time,26.40,2025-11-18
+E0256,D06,Payroll Tax Analyst,non_exempt,full_time,30.42,2025-11-22
+E0257,D07,Forklift Operator,non_exempt,full_time,24.15,2025-11-09
+E0258,D02,Software Engineer,exempt,full_time,71.21,2025-12-13
+E0259,D02,Software Engineer,exempt,full_time,62.48,2025-12-24
+E0260,D02,Software Engineer,exempt,full_time,50.22,2025-12-22
+E0261,D03,Sales Operations Analyst,exempt,full_time,63.11,2026-01-05
+E0262,D04,Customer Success Manager,non_exempt,full_time,31.44,2026-01-07
+E0263,D06,Payroll Specialist,non_exempt,full_time,35.76,2026-01-15
+E0264,D03,Account Executive,exempt,full_time,52.03,2026-01-23
+E0265,D04,Customer Success Manager,exempt,full_time,37.28,2026-01-05
+E0266,D08,Delivery Driver,non_exempt,full_time,28.88,2026-01-21
+E0267,D02,QA Analyst,exempt,full_time,67.83,2026-01-12
+E0268,D04,Support Specialist,non_exempt,full_time,24.79,2026-01-04
+E0269,D08,Delivery Driver,non_exempt,full_time,28.25,2026-01-06
+E0270,D07,Forklift Operator,non_exempt,full_time,24.74,2026-02-17
+E0271,D07,Warehouse Associate,non_exempt,part_time,23.58,2026-02-27
+E0272,D07,Forklift Operator,non_exempt,full_time,20.19,2026-02-28
+E0273,D07,Shift Lead,non_exempt,full_time,24.11,2026-02-24
+E0274,D02,QA Analyst,exempt,full_time,75.16,2026-02-02
+E0275,D03,Account Executive,exempt,full_time,58.95,2026-02-08
+E0276,D04,Customer Success Manager,non_exempt,full_time,28.47,2026-03-26
+E0277,D04,Implementation Consultant,non_exempt,full_time,32.26,2026-03-28
+E0278,D08,Fleet Mechanic,non_exempt,full_time,26.81,2026-03-18
+E0279,D02,Engineering Manager,non_exempt,full_time,50.87,2026-03-17
+E0280,D03,Sales Operations Analyst,exempt,full_time,64.43,2026-04-18
+E0281,D07,Forklift Operator,non_exempt,full_time,20.68,2026-04-27
+E0282,D08,Fleet Mechanic,non_exempt,full_time,23.24,2026-04-15
+E0283,D02,QA Analyst,exempt,full_time,51.59,2026-04-02
+E0284,D03,Account Executive,exempt,full_time,35.89,2026-04-10
+E0285,D05,Controller,exempt,full_time,41.39,2026-04-29
+E0286,D03,Sales Development Rep,exempt,full_time,33.62,2026-05-03
+E0287,D04,Implementation Consultant,non_exempt,part_time,30.50,2026-05-10
+E0288,D08,Fleet Mechanic,non_exempt,full_time,23.93,2026-05-28
+E0289,D01,Infrastructure Technician,exempt,full_time,61.70,2026-05-01
+E0290,D03,Sales Operations Analyst,non_exempt,full_time,48.12,2026-05-05
+E0291,D04,Implementation Consultant,non_exempt,full_time,25.73,2026-06-03
+E0292,D07,Shift Lead,non_exempt,part_time,19.72,2026-06-12
+E0293,D02,Software Engineer,non_exempt,full_time,68.58,2026-06-16
+E0294,D03,Account Executive,exempt,full_time,60.67,2026-06-26
+E0295,D01,Infrastructure Technician,exempt,full_time,62.81,2026-06-21
+E0296,D02,Software Engineer,exempt,full_time,54.89,2026-06-23
+E0297,D03,Sales Development Rep,exempt,full_time,50.01,2026-06-08
+E0298,D02,Engineering Manager,exempt,full_time,52.46,2026-07-17
+E0299,D03,Sales Development Rep,exempt,full_time,59.10,2026-07-06
+E0300,D07,Shift Lead,non_exempt,full_time,23.24,2026-07-29
+E0301,D08,Fleet Mechanic,non_exempt,full_time,26.99,2026-07-10
+E0302,D02,Software Engineer,exempt,full_time,65.10,2026-07-29
+E0303,D03,Sales Development Rep,non_exempt,full_time,32.20,2026-07-22
+E0304,D06,Payroll Specialist,non_exempt,full_time,32.46,2026-07-08
+E0305,D01,Platform Engineer,exempt,full_time,56.53,2026-08-22
+E0306,D01,Infrastructure Technician,exempt,full_time,59.07,2026-08-06
+E0307,D02,QA Analyst,exempt,full_time,69.70,2026-08-17
+E0308,D02,Engineering Manager,non_exempt,full_time,48.19,2026-08-16
+E0309,D03,Account Executive,exempt,full_time,32.49,2026-08-23
+E0310,D02,QA Analyst,exempt,full_time,70.67,2026-09-10
+E0311,D07,Shift Lead,non_exempt,full_time,25.05,2026-09-19
+E0312,D07,Shift Lead,non_exempt,full_time,22.62,2026-09-09
+E0313,D08,Delivery Driver,non_exempt,full_time,26.36,2026-09-29
+E0314,D01,Site Reliability Engineer,exempt,full_time,52.12,2026-09-21
+E0315,D02,QA Analyst,exempt,full_time,74.97,2026-09-14
+E0316,D05,Accountant,exempt,full_time,37.40,2026-09-20
+E0317,D07,Forklift Operator,non_exempt,full_time,21.63,2026-09-30

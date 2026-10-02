@@ -1,0 +1,4 @@
+department_id,cohort_id,cohort_name,naics_sector
+D10,MFG,Manufacturing,31
+D20,TECH,Technology,51
+D30,NEW,New Markets,81

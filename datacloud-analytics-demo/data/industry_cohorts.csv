@@ -1,0 +1,10 @@
+department_id,cohort_id,cohort_name,naics_sector
+D01,TECH,Technology,51
+D02,TECH,Technology,51
+D03,PROSVC,Professional Services,54
+D04,PROSVC,Professional Services,54
+D05,FINSVC,Financial Services,52
+D06,FINSVC,Financial Services,52
+D07,LOGIS,Transportation & Logistics,49
+D08,LOGIS,Transportation & Logistics,48
+D09,FIELD,Field Operations,81

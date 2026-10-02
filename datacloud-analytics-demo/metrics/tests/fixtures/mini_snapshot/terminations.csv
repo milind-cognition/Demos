@@ -1,0 +1,3 @@
+employee_id,termination_date,termination_type,reason
+E2,2026-02-20,voluntary,Relocation
+E5,2026-03-31,involuntary,Position eliminated

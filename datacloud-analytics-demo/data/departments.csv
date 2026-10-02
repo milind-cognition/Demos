@@ -1,0 +1,10 @@
+department_id,department_name,cost_center
+D01,Platform Engineering,CC-1100
+D02,Product Engineering,CC-1150
+D03,Sales,CC-1200
+D04,Customer Success,CC-1300
+D05,Finance,CC-1400
+D06,Payroll Operations,CC-1450
+D07,Warehouse Operations,CC-1500
+D08,Fleet Services,CC-1550
+D09,Field Services,CC-1600
