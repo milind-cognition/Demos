@@ -8,7 +8,9 @@ export type ChartKind =
   /** One line per department over time. */
   | "departments"
   /** Latest period, one bar per department. */
-  | "breakdown";
+  | "breakdown"
+  /** Latest period, one bar per group against the company-wide value; groups above it are flagged. */
+  | "benchmark";
 
 export interface StoryboardSection {
   metric: string;
@@ -90,6 +92,40 @@ export const STORYBOARDS: Storyboard[] = [
         chart: "departments",
         title: "Overtime rate by department",
         narrative: "Warehouse and Fleet run consistently above the company rate; exempt teams sit near zero.",
+      },
+    ],
+  },
+  {
+    id: "overtime-cost-benchmark",
+    title: "Overtime Cost Benchmark",
+    description: "What overtime costs per employee in each industry cohort, against the company-wide figure.",
+    headline: ["overtime_cost_per_employee", "overtime"],
+    sections: [
+      {
+        metric: "overtime_cost_per_employee",
+        chart: "trend",
+        title: "Company-wide overtime cost per employee",
+        narrative: "Peaks at $563 in December with the holiday surge, then eases to $239 in September from $335 in August.",
+      },
+      {
+        metric: "overtime_cost_per_employee",
+        chart: "benchmark",
+        title: "Where we are running hot",
+        narrative:
+          "Transportation & Logistics ($498) and Financial Services ($317) sit above the $239 company figure; Field Operations has no staff yet.",
+      },
+      {
+        metric: "overtime_cost_per_employee",
+        chart: "departments",
+        title: "Overtime cost per employee by cohort",
+        narrative:
+          "The company figure is the headcount-weighted average of these lines; Transportation & Logistics leads in 11 of 12 months.",
+      },
+      {
+        metric: "overtime",
+        chart: "breakdown",
+        title: "Overtime rate by department, latest month",
+        narrative: "In hours, Warehouse (9.2%) and Fleet (8.5%) run hottest against a 3.8% company rate.",
       },
     ],
   },

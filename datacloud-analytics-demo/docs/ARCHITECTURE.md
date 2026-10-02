@@ -128,8 +128,9 @@ clone; always regenerate and commit it alongside engine changes.
 - `src/lib/data.ts` fetches `metrics/index.json` and every `<key>.json` on load (`MetricsProvider`).
 - `src/config/metricCards.ts` — presentation per metric key: accent colour + one-line caption.
 - `src/config/storyboards.ts` — storyboards: `headline` metric keys (rendered as `MetricCard`s) and `sections`, each a
-  `TrendChart` of kind `trend` (company total), `departments` (one line per group), or `breakdown` (latest period,
-  one bar per group) with a title and a one-sentence narrative.
+  `TrendChart` of kind `trend` (company total), `departments` (one line per group), `breakdown` (latest period,
+  one bar per group), or `benchmark` (latest period, one bar per group against a company-wide reference line, groups
+  strictly above it flagged) with a title and a one-sentence narrative.
 - Routes (hash-based): `#/storyboards/<id>` and `#/metrics/<key>`. The sidebar lists storyboards and every metric in
   `index.json` automatically.
 - `src/config/config.test.ts` fails if a computed metric has no card config, if a storyboard references a metric that

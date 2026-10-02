@@ -18,6 +18,12 @@
       "label": "Overtime Rate",
       "unit": "percent",
       "file": "overtime.json"
+    },
+    {
+      "key": "overtime_cost_per_employee",
+      "label": "Overtime Cost per Employee",
+      "unit": "currency",
+      "file": "overtime_cost_per_employee.json"
     }
   ]
 }

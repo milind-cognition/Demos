@@ -7,7 +7,7 @@ from metrics.snapshot import ALL_DEPARTMENTS
 
 
 def test_registered_metrics():
-    assert metric_keys() == ["headcount", "turnover", "overtime"]
+    assert metric_keys() == ["headcount", "turnover", "overtime", "overtime_cost_per_employee"]
 
 
 def test_unknown_metric_lists_known_keys():
