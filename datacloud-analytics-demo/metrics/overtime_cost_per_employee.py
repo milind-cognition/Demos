@@ -11,9 +11,11 @@ Formula, per month and per cohort (USD)::
   every timecard in the month, including employees who leave before month-end.
 - Active employees are counted as in Headcount: hired on/before and not terminated on/before the
   last day of the month. Exempt and part-time employees count in the denominator.
-- A cohort with no active employees at month-end reports 0.0.
+- A cohort with no active employees at month-end reports 0.0, even if it paid overtime that month
+  (e.g. its last employee left mid-month). That cost still counts in the company rollup.
 - The ``All Departments`` rollup is total overtime cost / total active employees across the
-  company, i.e. the headcount-weighted average of the cohort values (not their simple mean).
+  company. Whenever every cohort that paid overtime has staff at month-end, this equals the
+  headcount-weighted average of the cohort values (not their simple mean).
 """
 
 from __future__ import annotations

@@ -1,3 +1,5 @@
+import shutil
+
 import pandas as pd
 import pytest
 
@@ -72,3 +74,15 @@ def test_satisfies_contract(mini_snapshot_dir):
     validate_metric_frame(frame, "overtime_cost_per_employee")
     assert (frame["value"] >= 0).all()
     assert (frame["value"] == frame["value"].round(2)).all()
+
+
+def test_fully_departed_cohort_reports_zero_but_cost_stays_in_rollup(mini_snapshot_dir, tmp_path, as_lookup):
+    snapshot_dir = tmp_path / "snapshot"
+    shutil.copytree(mini_snapshot_dir, snapshot_dir)
+    with (snapshot_dir / "terminations.csv").open("a", encoding="utf-8") as f:
+        f.write("E1,2026-03-20,voluntary,Relocation\nE3,2026-03-20,voluntary,Relocation\n")
+    values = as_lookup(compute_overtime_cost_per_employee(snapshot_dir))
+    # March: Manufacturing paid 375 + 216 = 591 but has no one active on 03-31 -> 0.0.
+    assert values[("2026-03", "Manufacturing")] == 0.0
+    # Company: 591 / 2 active (E4, E6 in Technology) = 295.5.
+    assert values[("2026-03", ALL_DEPARTMENTS)] == pytest.approx(295.5)
