@@ -55,8 +55,13 @@ That's the whole prompt. The rest comes from context Devin already has: the Jira
 `docs/ARCHITECTURE.md`, the saved **DataCloud Analytics — Add a Metric** playbook (attach it from the playbook picker,
 or type `!add_metric` in the prompt), and the `datacloud-analytics-tickets` skill.
 
-**Alternative kickoff from Jira:** on MDD-98, add a comment `@Devin can you pick this up?` (requires the Devin Jira
-integration to be connected for your account).
+**Hands-free kickoff from Jira (automation):** on MDD-98, add the label `devin`. A Jira Automation rule calls the
+Devin automation **MDD tickets → Devin (DataCloud Analytics)**, which starts a session on its own. Open
+https://app.devin.ai/automations/2756e8bcdd544a8cb28fe49d8ce0a0d8 → recent runs to jump into it. *"Nobody typed a
+prompt: tagging a ticket is how work gets assigned."* One-time Jira setup (MDD → Project settings → Automation):
+when **Labels** changes, if Labels contains `devin`, **Send web request** POST to the automation's webhook URL with
+header `X-Webhook-Secret` and custom body `{"issue": "{{issue.key}}", "summary": "{{issue.summary}}", "url": "{{issue.url}}"}`.
+For resets, remove the `devin` label.
 
 **Offline fallback** (if the session can't reach Jira; the file is the same ticket):
 
@@ -149,8 +154,8 @@ Product confirmed: a cohort is "high overtime" when its overtime cost per employ
 
 ## Reset after the demo
 
-Close the PR and delete its branch (`devin/mdd-98-*`), delete Devin's PR-link comment on MDD-98, and move the ticket
-back to **To Do**. `main` is untouched, so the next demo starts clean.
+Close the PR and delete its branch (`devin/mdd-98-*`), delete Devin's comments on MDD-98, remove the `devin` label, and
+move the ticket back to **To Do**. `main` is untouched, so the next demo starts clean.
 
 ## Known ambiguities in MDD-98 (presenter cheat sheet — don't show)
 
