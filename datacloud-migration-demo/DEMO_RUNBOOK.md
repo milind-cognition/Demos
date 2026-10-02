@@ -116,7 +116,13 @@ Devin finds it. To be explicit, prefix the prompt with `In datacloud-migration-d
   playbook, one validator — a wave, not a backlog."
 * "Each PR is independently provable, so you can review and merge them in any order."
 
-Launch **4 parallel Devin sessions** (one per job). Use the Playbook macro so every session gets the
+**One-prompt option (recommended on stage):** paste this into a single new session and it launches
+the four sessions below for you, then reports a PR/validation table:
+```
+!migrate_wave Launch the datacloud-migration-demo Act 4 migration wave for milind-cognition/Demos.
+```
+
+**Manual option:** launch **4 parallel Devin sessions** (one per job). Use the Playbook macro so every session gets the
 same procedure. Paste each prompt into its own new session:
 
 **Session A — turnover_snapshot**

@@ -18,7 +18,8 @@ target/
 scripts/validate.py         conformance + golden diff for a job  (VALIDATION.md)
 scripts/seed/               regenerate sample_data / expected_outputs (deterministic)
 DEMO_RUNBOOK.md             presenter script
-PLAYBOOK.md                 Devin Playbook text for the migration procedure
+PLAYBOOK.md                 Devin Playbook text for the migration procedure (!migrate_job)
+PLAYBOOK_FANOUT.md          Devin Playbook that launches the Act 4 wave (!migrate_wave)
 ```
 
 ## Quick start
